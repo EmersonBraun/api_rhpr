@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEffectiveGraduatesTable extends Migration
+class EffectiveGraduatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,20 @@ class CreateEffectiveGraduatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('effectivegraduates', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            
-            //$table->timestamps();
-            //$table->softDeletes();
-        });
+        DB::statement(
+            'CREATE VIEW effective_graduates AS
+                SELECT 
+                    "UserRG" AS rg,
+                    "nome" AS name,
+                    "graduacao" AS graduation,
+                    "quadro" AS group,
+                    "subquadro" AS subgroup,
+                    "inclusao_data" AS inclusion_date,
+                    "opm" AS opm_description,
+                    "referencia" AS reference,
+                    "cdopm" AS opm_code
+                from "EFETIVO_PRACAS"'
+            );
     }
 
     /**
@@ -28,6 +36,6 @@ class CreateEffectiveGraduatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('effectivegraduates');
+        DB::statement("DROP VIEW effective_graduates");
     }
 }

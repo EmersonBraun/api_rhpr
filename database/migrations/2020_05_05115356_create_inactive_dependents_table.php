@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInactiveDependentsTable extends Migration
+class InactiveDependentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,18 @@ class CreateInactiveDependentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inactivedependents', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            
-            //$table->timestamps();
-            //$table->softDeletes();
-        });
+        DB::statement(
+            'CREATE VIEW inactive_dependents AS
+                SELECT 
+                    "RG" AS rg,
+                    "nome" AS name,
+                    "sexo" AS gender,
+                    "data_nasc" AS birth_date,
+                    "irpf" AS agreement,
+                    "parentesco" AS kinship,
+                    "dt_ini" AS start_date,
+                    "dt_fim" AS end_date
+                from "DEPENDENTES_INATIVO"');
     }
 
     /**
@@ -28,6 +34,6 @@ class CreateInactiveDependentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inactivedependents');
+        DB::statement("DROP VIEW inactive_dependents");
     }
 }

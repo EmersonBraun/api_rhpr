@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDependentesAtivaTable extends Migration
+class DependentesAtivaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateDependentesAtivaTable extends Migration
     public function up()
     {
         Schema::create('DEPENDENTES_ATIVA', function (Blueprint $table) {
-            $table->string('rg', 50)->nullable();
+            $table->string('RG', 50)->nullable();
             $table->string('nome', 80)->nullable();
             $table->string('sexo', 50)->nullable();
             $table->timestamp('data_nasc', 0)->nullable();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReservationsTable extends Migration
+class ReservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,18 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            
-            //$table->timestamps();
-            //$table->softDeletes();
-        });
+        DB::statement(
+            'CREATE VIEW reservations AS
+                SELECT 
+                    "UserRG" AS rg,
+                    "nome" AS name,
+                    "posto" AS position,
+                    "quadro" AS group,
+                    "subquadro" AS subgroup,
+                    "data" AS start_date,
+                    "id"
+                FROM "RESERVA"'
+            );
     }
 
     /**
@@ -28,6 +34,6 @@ class CreateReservationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        DB::statement("DROP VIEW reservations");
     }
 }

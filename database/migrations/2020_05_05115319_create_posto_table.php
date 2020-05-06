@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostoTable extends Migration
+class PostoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreatePostoTable extends Migration
     public function up()
     {
         Schema::create('posto', function (Blueprint $table) {
-            $table->unsignedBigInteger('codigo');
+            $table->unsignedBigInteger('CODIGO');
             $table->string('descricao', 50);
         });
     }

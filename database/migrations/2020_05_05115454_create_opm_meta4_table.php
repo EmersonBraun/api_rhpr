@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOpmMeta4Table extends Migration
+class OpmMeta4Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,26 @@ class CreateOpmMeta4Table extends Migration
      */
     public function up()
     {
-        Schema::create('opmmeta4s', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            
-            //$table->timestamps();
-            //$table->softDeletes();
-        });
+        DB::statement(
+            'CREATE VIEW opm_meta4 AS
+                SELECT 
+                    "UNIDADE_META4" AS opm_meta4,
+                    "DESCRICAO_META4" AS opm_description_meta4,
+                    "ID_PAI" AS opm_asc_meta4,
+                    "DESCRICAO_PAI" AS opm_asc_id,
+                    "UNIDADE_PMPR" AS opm_pmpr,
+                    "CD_LOCAL_TRABALHO" AS opm_resp,
+                    "LOCAL_TRABALHO" AS address,
+                    "DATA_INICIO" AS start_date,
+                    "DATA_FIM" AS end_date,
+                    "LOGRADOURO" AS street,
+                    "BAIRRO" AS district,
+                    "MUNICIPIO" AS city,
+                    "CEP" AS cep,
+                    "DDD" AS ddd,
+                    "TELEFONE" AS phone
+                from "OPM_IMP_META4"'
+            );
     }
 
     /**
@@ -28,6 +42,6 @@ class CreateOpmMeta4Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('opmmeta4s');
+        DB::statement("DROP VIEW opm_meta4");
     }
 }

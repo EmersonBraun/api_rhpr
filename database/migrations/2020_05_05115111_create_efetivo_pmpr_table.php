@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEfetivoPmprTable extends Migration
+class EfetivoPmprTable extends Migration
 {
     /**
      * Run the migrations.

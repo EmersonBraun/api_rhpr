@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\Policial;
+use App\Models\PolicialHistorico;
 use AuxFactory;
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,9 @@ use AuxFactory;
 |
 */
 
-$factory->define(Policial::class, function (Faker $faker) {
+$factory->define(PolicialHistorico::class, function (Faker $faker) {
     return [
+        'SK_POLICIAL_HISTORICO' => $faker->randomNumber(3),
         'ID_META4' => $faker->randomNumber(3),
         'STD_OR_HR_PERIOD' => $faker->randomDigit,
         'DATA_ADMISSAO' => $faker->date('Y-m-d','now'),
@@ -43,6 +44,8 @@ $factory->define(Policial::class, function (Faker $faker) {
         'CIDADE' => $faker->city,
         'OPM_DESCRICAO' => $faker->name,
         'OPM_META4' => 'W'.$faker->randomNumber(6),
-        'CDOPM' => $faker->randomNumber(10)
+        'CDOPM' => $faker->randomNumber(10),
+        'dh_inicio' => $faker->date('Y-m-d','now'),
+        'dh_fim' => $faker->date('Y-m-d','now')
     ];
 });

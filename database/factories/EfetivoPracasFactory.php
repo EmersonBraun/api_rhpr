@@ -5,7 +5,8 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\Funcoesprivativas;
+use App\Models\EfetivoPracas;
+use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,8 +20,16 @@ use App\Models\Funcoesprivativas;
 |
 */
 
-$factory->define(Funcoesprivativas::class, function (Faker $faker) {
+$factory->define(EfetivoPracas::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'UserRG' => AuxFactory::RG(),
+        'nome' => $faker->name,
+        'graduacao' => $faker->randomElement(config('cops.positions')),
+        'quadro' => $faker->randomElement(config('cops.groups')),
+        'subquadro' => $faker->randomElement(config('cops.subgroups')),
+        'inclusao_data' => $faker->date('Y-m-d','now'),
+        'opm' => $faker->name,
+        'referencia' => $faker->randomDigit,
+        'cdopm' => $faker->randomNumber(10)
     ];
 });

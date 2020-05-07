@@ -21,6 +21,7 @@ use App\Models\Posto;
 
 $factory->define(Posto::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'CODIGO' => $faker->randomDigit,
+        'descricao' => $faker->randomElement(config('cops.positions'))
     ];
 });

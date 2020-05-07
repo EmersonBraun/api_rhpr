@@ -33,14 +33,16 @@ class Ausencia extends Model
      * @var array
      */
     protected $fillable = [
-        'codigo',
-		'rg',
-		'opm_meta4',
-		'opm_descricao',
-		'cod_incidente',
-		'units',
-		'dt_inic',
-		'dt_fim'
+        'NOME',
+        'CODIGO',
+        'RG',
+        'OPM_META4',
+        'OPM_DESCRICAO',
+        'COD_INCIDENTE',
+        'DESC_INCIDENTE',
+        'UNITS',
+        'DT_INIC',
+        'DT_FIM',
     ];
 
     /**

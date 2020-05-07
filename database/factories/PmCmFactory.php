@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\Policial;
+use App\Models\PmCm;
 use AuxFactory;
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ use AuxFactory;
 |
 */
 
-$factory->define(Policial::class, function (Faker $faker) {
+$factory->define(PmCm::class, function (Faker $faker) {
     return [
         'ID_META4' => $faker->randomNumber(3),
         'STD_OR_HR_PERIOD' => $faker->randomDigit,
@@ -43,6 +43,13 @@ $factory->define(Policial::class, function (Faker $faker) {
         'CIDADE' => $faker->city,
         'OPM_DESCRICAO' => $faker->name,
         'OPM_META4' => 'W'.$faker->randomNumber(6),
-        'CDOPM' => $faker->randomNumber(10)
+        'CDOPM' => $faker->randomNumber(10),
+        'nome_mae' => $faker->name('female'),
+        'nome_pai' => $faker->name('male'),
+        'numero_titulo' => $faker->randomNumber(8),
+        'zona' => $faker->randomNumber(3),
+        'secao' => $faker->randomNumber(3),
+        'uf' => $faker->stateAbbr,
+        'CPF' => AuxFactory::CPF()
     ];
 });

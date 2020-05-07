@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 use App\Models\Ausencia;
+use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -21,6 +22,15 @@ use App\Models\Ausencia;
 
 $factory->define(Ausencia::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'NOME' => $faker->name,
+        'CODIGO' => $faker->randomElement(config('cops.positions')),
+        'RG' => AuxFactory::RG(),
+        'OPM_META4' => 'W'.$faker->randomNumber(6),
+        'OPM_DESCRICAO' => $faker->name,
+        'COD_INCIDENTE' => mt_rand ( 5, 15 ),
+        'DESC_INCIDENTE' => $faker->text(200),
+        'UNITS' => $faker->randomDigit,
+        'DT_INIC' => $faker->date('Y-m-d','now'),
+        'DT_FIM' => $faker->date('Y-m-d', 'now'),
     ];
 });

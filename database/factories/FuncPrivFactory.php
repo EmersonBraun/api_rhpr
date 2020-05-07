@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\Privatefunctionsperiods;
+use App\Models\FuncoesPrivativas;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,8 +19,14 @@ use App\Models\Privatefunctionsperiods;
 |
 */
 
-$factory->define(Privatefunctionsperiods::class, function (Faker $faker) {
+$factory->define(FuncoesPrivativas::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'STD_ID_HR' => $faker->randomNumber(5),
+        'STD_OR_HR_PERIOD_NUMBER' => $faker->randomDigit,
+        'DT_START' => $faker->date('Y-m-d','now'),
+        'DT_END' => $faker->date('Y-m-d','now'),
+        'CBR_ID_FUNC_PRIV' => $faker->randomNumber(5),
+        'CBR_ID_FORM_ACT' => $faker->name,
+        'SCO_ID_REA_CHANG' => 'DES'
     ];
 });

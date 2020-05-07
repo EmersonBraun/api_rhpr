@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Historicalpolice;
+use App\Models\Funcpriv;
 
-class HistoricalpoliceTableSeeder extends Seeder
+class FuncprivTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class HistoricalpoliceTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Historicalpolice::class, $amount)->create();
+        factory(Funcpriv::class, $amount)->create();
     }
 }

@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 use App\Models\Reserva;
+use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -21,6 +22,11 @@ use App\Models\Reserva;
 
 $factory->define(Reserva::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'UserRG' => AuxFactory::RG(),
+        'nome' => $faker->name,
+        'posto' => $faker->randomElement(config('cops.positions')),
+        'quadro' => $faker->randomElement(config('cops.groups')),
+        'subquadro' => $faker->randomElement(config('cops.subgroups')),
+        'data' => $faker->date('Y-m-d','now'),
     ];
 });

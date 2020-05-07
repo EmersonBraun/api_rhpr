@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 use App\Models\Inativos;
+use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -21,6 +22,28 @@ use App\Models\Inativos;
 
 $factory->define(Inativos::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'STD_ID_HR' => $faker->randomNumber(5),
+        'STD_OR_RH_PERIOD' => $faker->randomDigit,
+        'DT_INI_RH' => $faker->date('Y-m-d','now'),
+        'ID_TIPO_RH' => $faker->randomDigit,
+        'N_TIPO_RH' => $faker->randomElement(['Pensionista', 'Outro']),
+        'CBR_NUM_RG' => AuxFactory::RG(),
+        'NOME' => $faker->name,
+        'DT_NASC' => $faker->date('Y-m-d','now'),
+        'SEXO' => $faker->randomElement(['Masculino', 'Feminino']),
+        'cargo' => $faker->randomElement(config('cops.positions')),
+        'POSTO' => $faker->randomElement(config('cops.groups')),
+        'N_RUA' => $faker->randomElement(['Rua','Avenida']),
+        'N_TIPO_LOCAL_END' => $faker->randomElement(['Residencial','Apartamento']),
+        'QUADRO' => $faker->randomElement(config('cops.class')),
+        'ORD_FONE' => $faker->randomDigit,
+        'N_TIPO_LOCAL_FONE' => $faker->randomElement(['Correspondência','Recados', NULL]),
+        'N_TIPO_LINHA' => $faker->randomElement(['Fixo','Celular']),
+        'FONE' => $faker->phoneNumber,
+        'END_LOGRADOURO' => $faker->streetName,
+        'END_NUMERO' => $faker->buildingNumber,
+        'END_COMPL' => $faker->secondaryAddress,
+        'END_BAIRRO' => $faker->citySuffix,
+        'END_CIDADE' => $faker->city,
     ];
 });

@@ -5,7 +5,9 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\Pmcm;
+use App\Models\DependentesAtiva;
+use AuxFactory;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,8 +21,15 @@ use App\Models\Pmcm;
 |
 */
 
-$factory->define(Pmcm::class, function (Faker $faker) {
+$factory->define(DependentesAtiva::class, function (Faker $faker) {
     return [
-        // 'key' => $factory->boolean(50),
+        'rg' => AuxFactory::RG(),
+        'nome' => $faker->name,
+        'sexo' => $faker->randomElement(['Masculino', 'Feminino']),
+        'data_nasc' => $faker->date('Y-m-d','now'),
+        'irpf' => $faker->randomElement(['IRPF', 'Previdência']),
+        'parentesco' => $faker->randomElement(['Conjuge', 'Pai', 'Mãe', 'Filho']),
+        'dt_ini' => $faker->date('Y-m-d','now'),
+        'dt_fim' => $faker->date('Y-m-d','now')
     ];
 });

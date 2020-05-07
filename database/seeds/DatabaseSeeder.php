@@ -11,6 +11,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        $this->call(
+            AusenciaTableSeeder::class,
+            DependentesAtivaTableSeeder::class,
+            DependentesInativoTableSeeder::class,
+            EfetivOpmprTableSeeder::class,
+            EfetivoPracasTableSeeder::class,
+            FuncoesPrivativasTableSeeder::class,
+            InativosTableSeeder::class,
+            OpmImpMeta4TableSeeder::class,
+            PmCmTableSeeder::class,
+            PolicialHistoricoTableSeeder::class,
+            PostoTableSeeder::class,
+            ReservaTableSeeder::class
+        );
     }
 }

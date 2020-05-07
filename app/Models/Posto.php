@@ -26,8 +26,8 @@ class Posto extends Model
      * @var array
      */
     protected $fillable = [
-        'id_posto',
-        'codigo'
+        'CODIGO',
+        'descricao'
     ];
 
     /**
@@ -43,7 +43,7 @@ class Posto extends Model
      * @var array
      */
     protected $casts = [
-        'id_posto' => 'int'
+        'CODIGO' => 'int'
     ];
 
     /**

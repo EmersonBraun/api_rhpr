@@ -13,7 +13,7 @@ class EfetivoPmpr extends Model
      *
      * @var string
      */
-    protected $table = 'efetivo_pmpr';
+    protected $table = 'EFETIVO_PMPR';
 
      /**
      * The primary key associated with the table.

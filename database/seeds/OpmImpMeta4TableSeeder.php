@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Opmimpmeta4;
+use App\Models\OpmImpMeta4;
 
-class Opmimpmeta4TableSeeder extends Seeder
+class OpmImpMeta4TableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class Opmimpmeta4TableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Opmimpmeta4::class, $amount)->create();
+        factory(OpmImpMeta4::class, $amount)->create();
     }
 }

@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Funcpriv;
+use App\Models\FuncoesPrivativas;
 
-class FuncprivTableSeeder extends Seeder
+class FuncoesPrivativasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class FuncprivTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Funcpriv::class, $amount)->create();
+        factory(FuncoesPrivativas::class, $amount)->create();
     }
 }

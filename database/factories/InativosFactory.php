@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
-use App\Models\Inativos;
-use AuxFactory;
+use App\Models\Inativo;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,15 +19,16 @@ use AuxFactory;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(Inativos::class, function (Faker $faker) {
+$factory->define(Inativo::class, function (Faker $faker) use($fakerBR){
     return [
         'STD_ID_HR' => $faker->randomNumber(5),
         'STD_OR_RH_PERIOD' => $faker->randomDigit,
         'DT_INI_RH' => $faker->date('Y-m-d','now'),
         'ID_TIPO_RH' => $faker->randomDigit,
         'N_TIPO_RH' => $faker->randomElement(['Pensionista', 'Outro']),
-        'CBR_NUM_RG' => AuxFactory::RG(),
+        'CBR_NUM_RG' => $fakerBR->rg,
         'NOME' => $faker->name,
         'DT_NASC' => $faker->date('Y-m-d','now'),
         'SEXO' => $faker->randomElement(['Masculino', 'Feminino']),

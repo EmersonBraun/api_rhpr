@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
 use App\Models\EfetivoPracas;
-use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,10 +19,11 @@ use AuxFactory;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(EfetivoPracas::class, function (Faker $faker) {
+$factory->define(EfetivoPracas::class, function (Faker $faker) use($fakerBR){
     return [
-        'UserRG' => AuxFactory::RG(),
+        'UserRG' => $fakerBR->rg,
         'nome' => $faker->name,
         'graduacao' => $faker->randomElement(config('cops.positions')),
         'quadro' => $faker->randomElement(config('cops.groups')),
@@ -30,6 +31,6 @@ $factory->define(EfetivoPracas::class, function (Faker $faker) {
         'inclusao_data' => $faker->date('Y-m-d','now'),
         'opm' => $faker->name,
         'referencia' => $faker->randomDigit,
-        'cdopm' => $faker->randomNumber(10)
+        'cdopm' => $faker->randomNumber(9)
     ];
 });

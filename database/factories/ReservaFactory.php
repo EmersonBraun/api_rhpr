@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
 use App\Models\Reserva;
-use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,14 +19,16 @@ use AuxFactory;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(Reserva::class, function (Faker $faker) {
+$factory->define(Reserva::class, function (Faker $faker) use($fakerBR){
     return [
-        'UserRG' => AuxFactory::RG(),
+        'UserRG' => $fakerBR->rg,
         'nome' => $faker->name,
         'posto' => $faker->randomElement(config('cops.positions')),
         'quadro' => $faker->randomElement(config('cops.groups')),
         'subquadro' => $faker->randomElement(config('cops.subgroups')),
         'data' => $faker->date('Y-m-d','now'),
+        'id' => $faker->randomNumber(3)
     ];
 });

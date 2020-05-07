@@ -18,7 +18,7 @@ class Ausencia extends Model
      *
      * @var string
      */
-    protected $table = 'ausencia';
+    protected $table = 'AUSENCIA';
 
      /**
      * The primary key associated with the table.

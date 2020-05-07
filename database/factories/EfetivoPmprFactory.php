@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
-use App\Models\EfetivOpmpr;
-use AuxFactory;
+use App\Models\EfetivoPmpr;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,17 +19,18 @@ use AuxFactory;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(EfetivOpmpr::class, function (Faker $faker) {
+$factory->define(EfetivOpmpr::class, function (Faker $faker) use($fakerBR){
     return [
         'STD_ID_HR' => $faker->randomNumber(6),
 		'STD_OR_HR_PERIOD' => $faker->randomDigit,
 		'STD_DT_START' => $faker->date('Y-m-d','now'),
 		'STD_N_FIRST_NAME' => $faker->name,
-		'CBR_NUM_RG' => AuxFactory::RG(),
+		'CBR_NUM_RG' => $fakerBR->rg,
 		'CBR_ID_FUNC_GRUOP' => $faker->randomElement(config('cops.class')),
 		'SUS_ID_WORK_CENTER' => 'PM'.$faker->randomNumber(6),
-		'STD_WORK_LOCBRA' => $faker->address,
+		'STD_WORK_LOCBRA' => $faker->streetAddress,
 		'STD_ID_SUB_GEO_DIV' => $faker->randomNumber(3),
 		'STD_N_SUB_GEO_DIV' => $faker->city,
 		'SCO_ID_WORK_UNIT' => 'W'.$faker->randomNumber(6),

@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\FuncoesPrivativas;
+use App\Models\FuncPriv;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,7 +19,7 @@ use App\Models\FuncoesPrivativas;
 |
 */
 
-$factory->define(FuncoesPrivativas::class, function (Faker $faker) {
+$factory->define(FuncPriv::class, function (Faker $faker) {
     return [
         'STD_ID_HR' => $faker->randomNumber(5),
         'STD_OR_HR_PERIOD_NUMBER' => $faker->randomDigit,

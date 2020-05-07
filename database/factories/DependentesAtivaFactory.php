@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
 use App\Models\DependentesAtiva;
-use AuxFactory;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +20,11 @@ use AuxFactory;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(DependentesAtiva::class, function (Faker $faker) {
+$factory->define(DependentesAtiva::class, function (Faker $faker) use($fakerBR){
     return [
-        'rg' => AuxFactory::RG(),
+        'RG' => $fakerBR->rg,
         'nome' => $faker->name,
         'sexo' => $faker->randomElement(['Masculino', 'Feminino']),
         'data_nasc' => $faker->date('Y-m-d','now'),

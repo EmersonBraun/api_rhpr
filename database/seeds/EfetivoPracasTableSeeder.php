@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Efetivopracas;
+use App\Models\EfetivoPracas;
 
-class EfetivopracasTableSeeder extends Seeder
+class EfetivoPracasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class EfetivopracasTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Efetivopracas::class, $amount)->create();
+        factory(EfetivoPracas::class, $amount)->create();
     }
 }

@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
 use App\Models\Policial;
-use AuxFactory;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -19,14 +19,15 @@ use AuxFactory;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(Policial::class, function (Faker $faker) {
+$factory->define(Policial::class, function (Faker $faker) use($fakerBR){
     return [
         'ID_META4' => $faker->randomNumber(3),
         'STD_OR_HR_PERIOD' => $faker->randomDigit,
         'DATA_ADMISSAO' => $faker->date('Y-m-d','now'),
         'NOME' => $faker->name,
-        'RG' => AuxFactory::RG(),
+        'RG' => $fakerBR->rg,
         'CLASSE' => $faker->randomElement(config('cops.class')),
         'NASCIMENTO' => $faker->date('Y-m-d','now'),
         'ID_SEXO' => $faker->randomElement([0,1]),
@@ -43,6 +44,6 @@ $factory->define(Policial::class, function (Faker $faker) {
         'CIDADE' => $faker->city,
         'OPM_DESCRICAO' => $faker->name,
         'OPM_META4' => 'W'.$faker->randomNumber(6),
-        'CDOPM' => $faker->randomNumber(10)
+        'CDOPM' => $faker->randomNumber(9)
     ];
 });

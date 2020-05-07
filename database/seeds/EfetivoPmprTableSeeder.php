@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Efetivopmpr;
+use App\Models\EfetivoPmpr;
 
-class EfetivopmprTableSeeder extends Seeder
+class EfetivoPmprTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class EfetivopmprTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Efetivopmpr::class, $amount)->create();
+        factory(EfetivoPmpr::class, $amount)->create();
     }
 }

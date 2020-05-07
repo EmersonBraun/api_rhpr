@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Inativos;
+use App\Models\Inativo;
 
 class InativosTableSeeder extends Seeder
 {
@@ -14,6 +14,6 @@ class InativosTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Inativos::class, $amount)->create();
+        factory(Inativo::class, $amount)->create();
     }
 }

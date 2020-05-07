@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Dependentesinativo;
+use App\Models\DependentesInativo;
 
-class DependentesinativoTableSeeder extends Seeder
+class DependentesInativoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class DependentesinativoTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Dependentesinativo::class, $amount)->create();
+        factory(DependentesInativo::class, $amount)->create();
     }
 }

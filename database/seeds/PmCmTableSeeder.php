@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Pmcm;
+use App\Models\PmCm;
 
-class PmcmTableSeeder extends Seeder
+class PmCmTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class PmcmTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Pmcm::class, $amount)->create();
+        factory(PmCm::class, $amount)->create();
     }
 }

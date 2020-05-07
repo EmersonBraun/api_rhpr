@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Policialhistorico;
+use App\Models\PolicialHistorico;
 
-class PolicialhistoricoTableSeeder extends Seeder
+class PolicialHistoricoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class PolicialhistoricoTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Policialhistorico::class, $amount)->create();
+        factory(PolicialHistorico::class, $amount)->create();
     }
 }

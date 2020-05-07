@@ -2,9 +2,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Opmpmpr;
+use App\Models\OpmPmpr;
 
-class OpmpmprTableSeeder extends Seeder
+class OpmPmprTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class OpmpmprTableSeeder extends Seeder
     public function run()
     {
         $amount = 10;
-        factory(Opmpmpr::class, $amount)->create();
+        factory(OpmPmpr::class, $amount)->create();
     }
 }

@@ -23,15 +23,15 @@ $factory->define(OpmPmpr::class, function (Faker $faker) {
     return [
         'META4' => 'W'.$faker->randomNumber(6),
         'NOME_META4' => $faker->name,
-        'CODIGO' => $faker->randomNumber(10),
+        'CODIGO' => $faker->randomNumber(9),
         'DESCRICAO' => $faker->text(5),
         'ABREVIATURA' => $faker->text(3),
         'TIPO' => $faker->randomElement(['OP','ADM']),
         'MUNICIPIO' => $faker->city,
         'CDMUNICIPIO' => $faker->randomNumber(3),
         'TITULO' => $faker->randomElement(['SECAO','OPM','GRUPAMENTO']),
-        'CODIGOBASE' => $faker->randomNumber(10),
-        'CODIGONOVO' => $faker->randomNumber(10),
+        'CODIGOBASE' => $faker->randomNumber(9),
+        'CODIGONOVO' => $faker->randomNumber(9),
         'TELEFONE' => $faker->phone
     ];
 });

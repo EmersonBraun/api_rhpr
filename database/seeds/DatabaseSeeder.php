@@ -11,11 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(
+        $this->call([
             AusenciaTableSeeder::class,
             DependentesAtivaTableSeeder::class,
             DependentesInativoTableSeeder::class,
-            EfetivOpmprTableSeeder::class,
+            EfetivoPmprTableSeeder::class,
             EfetivoPracasTableSeeder::class,
             FuncoesPrivativasTableSeeder::class,
             InativosTableSeeder::class,
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             PmCmTableSeeder::class,
             PolicialHistoricoTableSeeder::class,
             PostoTableSeeder::class,
-            ReservaTableSeeder::class
-        );
+            ReservaTableSeeder::class,
+        ]);
     }
 }

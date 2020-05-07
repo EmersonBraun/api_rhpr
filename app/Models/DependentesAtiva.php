@@ -18,7 +18,7 @@ class DependentesAtiva extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'rg';
+    protected $primaryKey = 'RG';
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +26,7 @@ class DependentesAtiva extends Model
      * @var array
      */
     protected $fillable = [
-        'rg',
+        'RG',
         'nome',
         'sexo',
         'data_nasc',

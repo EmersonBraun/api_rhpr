@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\OpmImpMeta4;
+use App\Models\v0\OpmImpMeta4;
 
 class OpmImpMeta4TableSeeder extends Seeder
 {

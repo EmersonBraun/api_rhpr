@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Ausencia;
+use App\Models\v0\Ausencia;
 
 class AusenciaTableSeeder extends Seeder
 {

@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\DependentesAtiva;
+use App\Models\v0\DependentesAtiva;
 
 class DependentesAtivaTableSeeder extends Seeder
 {

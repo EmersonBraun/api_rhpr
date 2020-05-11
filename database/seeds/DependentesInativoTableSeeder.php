@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\DependentesInativo;
+use App\Models\v0\DependentesInativo;
 
 class DependentesInativoTableSeeder extends Seeder
 {

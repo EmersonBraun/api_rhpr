@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\FuncPriv;
+use App\Models\v0\FuncPriv;
 
 class FuncPrivTableSeeder extends Seeder
 {

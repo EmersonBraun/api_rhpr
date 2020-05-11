@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\EfetivoPmpr;
+use App\Models\v0\EfetivoPmpr;
 
 class EfetivoPmprTableSeeder extends Seeder
 {

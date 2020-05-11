@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Policial;
+use App\Models\v0\Policial;
 
 class PolicialTableSeeder extends Seeder
 {

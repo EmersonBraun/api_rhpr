@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\OpmPmpr;
+use App\Models\v0\OpmPmpr;
 /*
 |--------------------------------------------------------------------------
 | Model Factories

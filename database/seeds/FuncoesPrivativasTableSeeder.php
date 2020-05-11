@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\FuncoesPrivativas;
+use App\Models\v0\FuncoesPrivativas;
 
 class FuncoesPrivativasTableSeeder extends Seeder
 {

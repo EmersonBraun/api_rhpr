@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\PmCm;
+use App\Models\v0\PmCm;
 
 class PmCmTableSeeder extends Seeder
 {

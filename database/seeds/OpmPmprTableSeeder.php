@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\OpmPmpr;
+use App\Models\v0\OpmPmpr;
 
 class OpmPmprTableSeeder extends Seeder
 {

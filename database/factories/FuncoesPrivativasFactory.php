@@ -5,7 +5,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-use App\Models\FuncoesPrivativas;
+use App\Models\v0\FuncoesPrivativas;
 /*
 |--------------------------------------------------------------------------
 | Model Factories

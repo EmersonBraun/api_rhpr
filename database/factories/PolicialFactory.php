@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
-use App\Models\Policial;
+use App\Models\v0\Policial;
 /*
 |--------------------------------------------------------------------------
 | Model Factories

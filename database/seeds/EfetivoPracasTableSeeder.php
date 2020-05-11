@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\EfetivoPracas;
+use App\Models\v0\EfetivoPracas;
 
 class EfetivoPracasTableSeeder extends Seeder
 {

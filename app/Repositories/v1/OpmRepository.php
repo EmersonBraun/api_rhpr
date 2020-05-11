@@ -20,27 +20,68 @@ class OpmRepository extends BaseRepository
     protected $returnContent = '';
     protected $statusCode = 400;
     protected $options = 0;
+    protected $perPage = 25;
     
 	public function __construct( Opm $model )
 	{
 		$this->model = $model;
     }
 
-    /**
-     * Example of expecific action from OpmRepositorie.
-     * CRUD functions are inherited from BaseRepository
-     *
-     * @return array
-     */
-    public function example($foo, $bar)
+    public function searchGet($request, "GET")
     {
-        try{
-            $this->obj = $this->model->where(['name'=> $foo, 'age' => $bar])->get();
-            $this->statusCode = 200;
-        } catch(\Throwable $th) {
-            $this->returnContent = $th->getMessage();
+        $page = false,
+        if (isset($data['page'])) { 
+            $page = $data['page']; 
+            unset( $data['page']); 
         }
-        $typeFunction = 'load'; // may load,found,create,update,delete,restore or forceDelete
-        return $this->mountReturn($typeFunction, $this->obj, $this->statusCode, $this->contentError);
+        if (isset($data['per_page'])) { 
+            $this->perPage = $data['per_page']; 
+            unset( $data['per_page']); 
+        }
+
+        $query = $this->service->query($this->model, $request, "GET");
+
+        try{
+            if ($page) $response = $query->paginate($this->perPage, ['*'], 'page', $page);
+            else $response = $query->get();
+
+            $this->returnData = $response ? $response : [];
+            $this->statusCode = 200;
+            $success = true;
+        } catch(\Throwable $th) {
+            $this->errorMessage = $th->getMessage();
+            $success = false;
+        }
+
+        return $this->mountReturn('load', $this->returnData, $this->statusCode, $this->contentError);
+    }
+
+    public function searchPost($request, "POST")
+    {
+        $page = false,
+        if (isset($data['page'])) { 
+            $page = $data['page']; 
+            unset( $data['page']); 
+        }
+        if (isset($data['per_page'])) { 
+            $this->perPage = $data['per_page']; 
+            unset( $data['per_page']); 
+        }
+
+        $query = $this->service->query($this->model, $request, "GET");
+
+        try{
+            if ($page) $response = $query->paginate($this->perPage, ['*'], 'page', $page);
+            else $response = $query->get();
+
+            $this->returnData = $response ? $response : [];
+            $this->statusCode = 200;
+            $success = true;
+        } catch(\Throwable $th) {
+            $this->errorMessage = $th->getMessage();
+            $success = false;
+        }
+
+        return $this->mountReturn('load', $this->returnData, $this->statusCode, $this->contentError);
     }
 }

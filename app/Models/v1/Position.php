@@ -4,21 +4,21 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Privatefunctionsperiods extends Model
+class Position extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'private_functions_periods';
+    protected $table = 'positions';
 
      /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'hr_id';
+    protected $primaryKey = 'position_code';
 
     /**
      * The attributes that are mass assignable.
@@ -26,13 +26,8 @@ class Privatefunctionsperiods extends Model
      * @var array
      */
     protected $fillable = [
-        'hr_id',
-        'period',
-        'start_date',
-        'end_date',
-        'function_id',
-        'form_act',
-        'change',
+        'position_code',
+        'position_description',
     ];
 
     /**
@@ -40,7 +35,7 @@ class Privatefunctionsperiods extends Model
      *
      * @var array
      */
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     /**
      * The attributes that should be cast to native types.

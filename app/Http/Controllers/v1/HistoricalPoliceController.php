@@ -16,12 +16,12 @@ class HistoricalPoliceController extends Controller
 
     /**
     * @OA\Get(
-    *     tags={"historicalPolice"},
-    *     path="api/v1/historicalPolice",
-    *     description="Return a list with historicalPolices",
+    *     tags={"HistoricalPolice"},
+    *     path="api/v1/HistoricalPolice",
+    *     description="Return a list with HistoricalPolices",
     *     @OA\Response(
     *         response=200,
-    *         description="A list with historicalPolices",
+    *         description="A list with HistoricalPolices",
     *     ),
     *     @OA\Response(
     *         response=400,
@@ -37,9 +37,9 @@ class HistoricalPoliceController extends Controller
     *     ),
     * )
     */
-    public function seach(HistoricalPoliceRequest $request)
+    public function search(HistoricalPoliceRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

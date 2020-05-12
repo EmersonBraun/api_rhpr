@@ -57,14 +57,14 @@ use App\Models\v1\OpmMeta4;
 use App\Observers\v1\OpmMeta4Observer;
 use App\Models\v1\Opm;
 use App\Observers\v1\OpmObserver;
-use App\Models\v1\Positions;
-use App\Observers\v1\PositionsObserver;
-use App\Models\v1\PrivateFunctions;
-use App\Observers\v1\PrivateFunctionsObserver;
-use App\Models\v1\PrivateFunctionsPeriods;
-use App\Observers\v1\PrivateFunctionsPeriodsObserver;
-use App\Models\v1\Reservations;
-use App\Observers\v1\ReservationsObserver;
+use App\Models\v1\Position;
+use App\Observers\v1\PositionObserver;
+use App\Models\v1\PrivateFunction;
+use App\Observers\v1\PrivateFunctionObserver;
+use App\Models\v1\PrivateFunctionsPeriod;
+use App\Observers\v1\PrivateFunctionsPeriodObserver;
+use App\Models\v1\Reservation;
+use App\Observers\v1\ReservationObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -112,9 +112,9 @@ class AppServiceProvider extends ServiceProvider
         Inactive::observe(InactiveObserver::class);
         OpmMeta4::observe(OpmMeta4Observer::class);
         Opm::observe(OpmObserver::class);
-        Positions::observe(PositionsObserver::class);
-        PrivateFunctions::observe(PrivateFunctionsObserver::class);
-        PrivateFunctionsPeriods::observe(PrivateFunctionsPeriodsObserver::class);
-        Reservations::observe(ReservationsObserver::class);
+        Position::observe(PositionObserver::class);
+        PrivateFunction::observe(PrivateFunctionObserver::class);
+        PrivateFunctionsPeriod::observe(PrivateFunctionsPeriodObserver::class);
+        Reservation::observe(ReservationObserver::class);
     }
 }

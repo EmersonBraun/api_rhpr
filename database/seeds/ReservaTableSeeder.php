@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Reserva;
+use App\Models\v0\Reserva;
 
 class ReservaTableSeeder extends Seeder
 {

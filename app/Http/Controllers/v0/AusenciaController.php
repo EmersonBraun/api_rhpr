@@ -37,9 +37,9 @@ class AusenciaController extends Controller
     *     ),
     * )
     */
-    public function seach(AusenciaRequest $request)
+    public function search(AusenciaRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 

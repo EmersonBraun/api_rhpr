@@ -37,9 +37,9 @@ class FuncPrivController extends Controller
     *     ),
     * )
     */
-    public function seach(FuncPrivRequest $request)
+    public function search(FuncPrivRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

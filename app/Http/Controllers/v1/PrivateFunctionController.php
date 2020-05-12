@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\PrivateFunctionsPeriodsRequest;
-use App\Repositories\v1\PrivateFunctionsPeriodsRepository;
+use App\Http\Requests\v1\PrivateFunctionRequest;
+use App\Repositories\v1\PrivateFunctionRepository;
 
-class PrivateFunctionsPeriodsController extends Controller
+class PrivateFunctionController extends Controller
 {
     protected $repository;
-    public function __construct(PrivateFunctionsPeriodsRepository $repository)
+    public function __construct(PrivateFunctionRepository $repository)
 	{
         $this->repository = $repository;
     }
 
     /**
     * @OA\Get(
-    *     tags={"privateFunctionsPeriods"},
-    *     path="api/v1/privateFunctionsPeriods",
-    *     description="Return a list with privateFunctionsPeriods",
+    *     tags={"PrivateFunction"},
+    *     path="api/v1/PrivateFunction",
+    *     description="Return a list with PrivateFunction",
     *     @OA\Response(
     *         response=200,
-    *         description="A list with privateFunctionsPeriods",
+    *         description="A list with PrivateFunction",
     *     ),
     *     @OA\Response(
     *         response=400,
@@ -37,9 +37,9 @@ class PrivateFunctionsPeriodsController extends Controller
     *     ),
     * )
     */
-    public function seach(PrivateFunctionsPeriodsRequest $request)
+    public function search(PrivateFunctionRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

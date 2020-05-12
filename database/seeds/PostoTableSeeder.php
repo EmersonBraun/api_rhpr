@@ -2,7 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Posto;
+use App\Models\v0\Posto;
 
 class PostoTableSeeder extends Seeder
 {

@@ -37,9 +37,9 @@ class ActiveDependentsController extends Controller
     *     ),
     * )
     */
-    public function seach(ActiveDependentsRequest $request)
+    public function search(ActiveDependentsRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

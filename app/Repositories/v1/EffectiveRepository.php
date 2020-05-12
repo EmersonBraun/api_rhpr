@@ -6,6 +6,7 @@ use App\Models\v1\Effective;
 use App\Repositories\BaseRepository;
 
 use App\Traits\ResponseTrait;
+use App\Services\QueryService;
 /**
 * Repository Pattern allows encapsulation of data access logic
 */
@@ -14,7 +15,8 @@ class EffectiveRepository extends BaseRepository
     use ResponseTrait;
 
     protected $model;
-    protected $obj = [];
+    protected $service;
+    protected $returnData = [];
     protected $returnType = 'error';
     protected $returnMsg = '';
     protected $returnContent = '';
@@ -22,9 +24,10 @@ class EffectiveRepository extends BaseRepository
     protected $options = 0;
     protected $perPage = 25;
     
-	public function __construct( Effective $model )
+	public function __construct( Effective $model,  QueryService $service )
 	{
 		$this->model = $model;
+		$this->service = $service;
     }
 
     public function search($request)
@@ -39,7 +42,7 @@ class EffectiveRepository extends BaseRepository
             unset( $data['per_page']); 
         }
 
-        $query = $this->service->query($this->model, $request, $request->method());
+        $query = $this->service->query($this->model, $request->all(), $request->method());
 
         try{
             if ($page) $response = $query->paginate($this->perPage, ['*'], 'page', $page);
@@ -49,7 +52,7 @@ class EffectiveRepository extends BaseRepository
             $this->statusCode = 200;
             $success = true;
         } catch(\Throwable $th) {
-            $this->errorMessage = $th->getMessage();
+            $this->contentError = $th->getMessage();
             $success = false;
         }
 

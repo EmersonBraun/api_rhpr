@@ -28,6 +28,7 @@ class Absence extends Model
     protected $fillable = [
         'id',
         'name',
+        'code',
         'position',
         'rg',
         'opm_meta4',

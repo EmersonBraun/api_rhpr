@@ -37,9 +37,9 @@ class EffectiveGraduatesController extends Controller
     *     ),
     * )
     */
-    public function seach(EffectiveGraduatesRequest $request)
+    public function search(EffectiveGraduatesRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

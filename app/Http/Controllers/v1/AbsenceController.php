@@ -37,9 +37,9 @@ class AbsenceController extends Controller
     *     ),
     * )
     */
-    public function seach(AbsenceRequest $request)
+    public function search(AbsenceRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

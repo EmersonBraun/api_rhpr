@@ -4,7 +4,7 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Reservations extends Model
+class Reservation extends Model
 {
     /**
      * The table associated with the model.

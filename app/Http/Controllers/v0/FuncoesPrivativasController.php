@@ -37,9 +37,9 @@ class FuncoesPrivativasController extends Controller
     *     ),
     * )
     */
-    public function seach(FuncoesPrivativasRequest $request)
+    public function search(FuncoesPrivativasRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

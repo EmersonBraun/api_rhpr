@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\ReservationsRequest;
-use App\Repositories\v1\ReservationsRepository;
+use App\Http\Requests\v1\ReservationRequest;
+use App\Repositories\v1\ReservationRepository;
 
-class ReservationsController extends Controller
+class ReservationController extends Controller
 {
     protected $repository;
-    public function __construct(ReservationsRepository $repository)
+    public function __construct(ReservationRepository $repository)
 	{
         $this->repository = $repository;
     }
 
     /**
     * @OA\Get(
-    *     tags={"reservations"},
-    *     path="api/v1/reservations",
-    *     description="Return a list with reservations",
+    *     tags={"Reservation"},
+    *     path="api/v1/Reservation",
+    *     description="Return a list with Reservation",
     *     @OA\Response(
     *         response=200,
-    *         description="A list with reservations",
+    *         description="A list with Reservation",
     *     ),
     *     @OA\Response(
     *         response=400,
@@ -37,9 +37,9 @@ class ReservationsController extends Controller
     *     ),
     * )
     */
-    public function seach(ReservationsRequest $request)
+    public function search(ReservationRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

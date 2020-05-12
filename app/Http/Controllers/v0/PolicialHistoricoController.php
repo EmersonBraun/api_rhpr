@@ -37,9 +37,9 @@ class PolicialHistoricoController extends Controller
     *     ),
     * )
     */
-    public function seach(PolicialHistoricoRequest $request)
+    public function search(PolicialHistoricoRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

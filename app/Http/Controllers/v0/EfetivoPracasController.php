@@ -37,9 +37,9 @@ class EfetivoPracasController extends Controller
     *     ),
     * )
     */
-    public function seach(EfetivoPracasRequest $request)
+    public function search(EfetivoPracasRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

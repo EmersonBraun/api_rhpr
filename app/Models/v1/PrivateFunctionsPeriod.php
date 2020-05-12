@@ -4,21 +4,21 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Privatefunctions extends Model
+class Privatefunctionsperiod extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'private_functions';
+    protected $table = 'private_functions_periods';
 
      /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'hr_id';
 
     /**
      * The attributes that are mass assignable.
@@ -26,17 +26,13 @@ class Privatefunctions extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
+        'hr_id',
+        'period',
         'start_date',
         'end_date',
         'function_id',
-        'position',
-        'group',
-        'subgroup',
-        'opm_meta4',
         'form_act',
-        'vacancy',
-        'observation',
+        'change',
     ];
 
     /**

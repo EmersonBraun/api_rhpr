@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\PositionsRequest;
-use App\Repositories\v1\PositionsRepository;
+use App\Http\Requests\v1\PrivateFunctionsPeriodRequest;
+use App\Repositories\v1\PrivateFunctionsPeriodRepository;
 
-class PositionsController extends Controller
+class PrivateFunctionsPeriodController extends Controller
 {
     protected $repository;
-    public function __construct(PositionsRepository $repository)
+    public function __construct(PrivateFunctionsPeriodRepository $repository)
 	{
         $this->repository = $repository;
     }
 
     /**
     * @OA\Get(
-    *     tags={"positions"},
-    *     path="api/v1/positions",
-    *     description="Return a list with positions",
+    *     tags={"privateFunctionsPeriod"},
+    *     path="api/v1/privateFunctionsPeriod",
+    *     description="Return a list with privateFunctionsPeriod",
     *     @OA\Response(
     *         response=200,
-    *         description="A list with positions",
+    *         description="A list with privateFunctionsPeriod",
     *     ),
     *     @OA\Response(
     *         response=400,
@@ -37,9 +37,9 @@ class PositionsController extends Controller
     *     ),
     * )
     */
-    public function seach(PositionsRequest $request)
+    public function search(PrivateFunctionsPeriodRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

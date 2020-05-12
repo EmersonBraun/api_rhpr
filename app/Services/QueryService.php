@@ -14,9 +14,8 @@ class QueryService {
         $this->sanitizeModel($model);
         $this->sanitizeData($data);
         $this->verbose = $verbose;
-        $query = $this->mountQueryGet($data);
-        $execute = $this->execute($query);
-        return $execute;
+        $query = $this->mountQuery();
+        return $query;
     }
 
     public function sanitizeData($data) 
@@ -31,66 +30,52 @@ class QueryService {
                 in_array($key, $fillable) || 
                 in_array($key.'_like', $fillable) || 
                 in_array($key.'_start', $fillable) || 
-                in_array($key.'_send', $fillable) || 
+                in_array($key.'_send', $fillable)
                 ) {
-                array_push($this->queryData,[$key => $value]);
+                $this->queryData[$key] = $value;
             }
         }
     }
 
     public function sanitizeModel($model) 
     {
-        if ($model instanceof Eloquent\Builder) $this->model = $model;
-        else $this->model = $model::select();
+        // if ($model instanceof Eloquent\Builder) $this->model = $model;
+        // else 
+        $this->model = $model;
     }
     
-    public funcq ($data) {
-        if ($this->verbose == 'GET') $query = $this->whereGet();
-        else $query = $this->wherePost();
+    public function mountQuery () {
+        $query = $this->model->select();
+        if (count($this->queryData)) {
+            foreach ($this->queryData as $key => $value) {
+                if (!is_array($value) && !strpos($value, ',')) {
+                    $cleanKey = $this->cleanKey($key);
+                    $operator = $this->getOperator($key);
+                    $cleanVal = $this->cleanGetValue($value);
+                    $query->where($cleanKey, $operator, $value);
+                }
+                if ($this->verbose == 'GET' && strpos($value, ',')) {
+                    $array = explode(',', $value);
+                    $query->whereIn($key, $array);
+                } 
+                if(is_array($value)) {
+                    $query->whereIn($key, $value);
+                }
+            }
+        }
         
-        foreach ($this->queryOrder as $key => $value) {
-            if ($key == 'limit') $query->limit((int) $value);
-            if ($key == 'limit') $query->offset((int) $value);
-            if ($key == 'order_by') {
-                $orderBy = $this->getOrderBy($value);
-                $query->orderBy($orderBy[0], $orderBy[1])
+        if (count($this->queryOrder)) {
+            foreach ($this->queryOrder as $key => $value) {
+                if ($key == 'limit') $query->limit((int) $value);
+                if ($key == 'offset') $query->offset((int) $value);
+                if ($key == 'order_by') {
+                    $orderBy = $this->getOrderBy($value);
+                    $query->orderBy($orderBy[0], $orderBy[1]);
+                }
             }
         }
 
         return $query;
-    }
-
-    public function whereGet()
-    {
-        $query = $this->model;
-
-        if(strpos($val, ',')) {
-            $array = explode(',', $val);
-            $query->whereIn($key, $array);
-        } else {
-            $cleanKey = $this->cleanKey($key);
-            $operator = $this->getOperator($key);
-            $cleanVal = $this->cleanGetValue($val);
-            $query->where($cleanKey, $operator, $val);
-        }
-
-        return $query;
-    }
-
-    public function wherePost()
-    {
-        $query = $this->model;
-
-        if(is_array($val)) {
-            $query->whereIn($key, $val);
-        } else {
-            $cleanKey = $this->cleanKey($key);
-            $operator = $this->getOperator($key);
-            $cleanVal = $this->cleanGetValue($val);
-            $query->where($cleanKey, $operator, $val);
-        }
-
-        return $query; 
     }
 
     public function getOrderBy($val)
@@ -103,16 +88,16 @@ class QueryService {
 
     public function getEndOfKey($key)
     {
-        $endString = explode('_', $key)[count($key)-1];
-        return $endString;
+        $endString = explode('_', $key);
+        return $endString[count($endString)-1];
     }
 
     public function cleanKey($key)
     {
         $endString = $this->getEndOfKey($key);
         if ($endString == 'like') return substr($key, 0, -4);
-        if ($endString == 'start') return substr($key, 0, -5)
-        if ($endString == 'end') return substr($key, 0, -3)
+        if ($endString == 'start') return substr($key, 0, -5);
+        if ($endString == 'end') return substr($key, 0, -3);
         return $key;
     }
 

@@ -37,9 +37,9 @@ class OpmController extends Controller
     *     ),
     * )
     */
-    public function seach(OpmRequest $request)
+    public function search(OpmRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

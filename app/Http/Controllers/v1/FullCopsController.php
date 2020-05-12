@@ -37,9 +37,9 @@ class FullCopsController extends Controller
     *     ),
     * )
     */
-    public function seach(FullCopsRequest $request)
+    public function search(FullCopsRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

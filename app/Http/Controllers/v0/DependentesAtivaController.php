@@ -37,9 +37,9 @@ class DependentesAtivaController extends Controller
     *     ),
     * )
     */
-    public function seach(DependentesAtivaRequest $request)
+    public function search(DependentesAtivaRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

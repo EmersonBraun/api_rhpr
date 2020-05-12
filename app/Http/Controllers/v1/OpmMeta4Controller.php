@@ -37,9 +37,9 @@ class OpmMeta4Controller extends Controller
     *     ),
     * )
     */
-    public function seach(OpmMeta4Request $request)
+    public function search(OpmMeta4Request $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

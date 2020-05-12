@@ -37,9 +37,9 @@ class PostoController extends Controller
     *     ),
     * )
     */
-    public function seach(PostoRequest $request)
+    public function search(PostoRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

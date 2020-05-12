@@ -8,9 +8,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Trais\ResponseTrait;
+use App\Traits\ResponseTrait;
 
-class PrivateFunctionsRequest extends FormRequest
+class PrivateFunctionRequest extends FormRequest
 {
     use ResponseTrait;
     /**

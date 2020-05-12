@@ -8,9 +8,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Trais\ResponseTrait;
+use App\Traits\ResponseTrait;
 
-class PositionsRequest extends FormRequest
+class PositionRequest extends FormRequest
 {
     use ResponseTrait;
     /**

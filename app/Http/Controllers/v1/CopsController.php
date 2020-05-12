@@ -37,9 +37,9 @@ class CopsController extends Controller
     *     ),
     * )
     */
-    public function seach(CopsRequest $request)
+    public function search(CopsRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

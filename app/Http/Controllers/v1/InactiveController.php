@@ -37,9 +37,9 @@ class InactiveController extends Controller
     *     ),
     * )
     */
-    public function seach(InactiveRequest $request)
+    public function search(InactiveRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

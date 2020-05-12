@@ -37,9 +37,9 @@ class DependentesInativoController extends Controller
     *     ),
     * )
     */
-    public function seach(DependentesInativoRequest $request)
+    public function search(DependentesInativoRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 

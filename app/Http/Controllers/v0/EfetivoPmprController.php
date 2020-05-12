@@ -37,9 +37,9 @@ class EfetivoPmprController extends Controller
     *     ),
     * )
     */
-    public function seach(EfetivoPmprRequest $request)
+    public function search(EfetivoPmprRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

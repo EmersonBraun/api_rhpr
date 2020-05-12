@@ -37,9 +37,9 @@ class ReservaController extends Controller
     *     ),
     * )
     */
-    public function seach(ReservaRequest $request)
+    public function search(ReservaRequest $request)
     {
-        $response = $this->repository->seach($request->all());
+        $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

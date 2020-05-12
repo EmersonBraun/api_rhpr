@@ -37,39 +37,9 @@ class PolicialController extends Controller
     *     ),
     * )
     */
-    public function searchGet(PolicialRequest $request)
+    public function seach(PolicialRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
-
-    /**
-    * @OA\Post(
-    *     tags={"policial"},
-    *     path="api/v0/policial",
-    *     description="A list with policial",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with policial",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(PolicialRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
 }

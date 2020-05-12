@@ -37,39 +37,10 @@ class AusenciaController extends Controller
     *     ),
     * )
     */
-    public function searchGet(AusenciaRequest $request)
+    public function seach(AusenciaRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
-
-    /**
-    * @OA\Post(
-    *     tags={"ausencia"},
-    *     path="api/v0/ausencia",
-    *     description="Return a list with ausencias",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with ausencia",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(AusenciaRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    } 
 
 }

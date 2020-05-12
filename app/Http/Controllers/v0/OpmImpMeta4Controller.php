@@ -37,39 +37,9 @@ class OpmImpMeta4Controller extends Controller
     *     ),
     * )
     */
-    public function searchGet(OpmImpMeta4Request $request)
+    public function seach(OpmImpMeta4Request $request)
     {
-        $response = $this->repository->searchGet($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
-
-    /**
-    * @OA\Post(
-    *     tags={"opmImpMeta4"},
-    *     path="api/v0/opmImpMeta4",
-    *     description="A list with opmImpMeta4",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with opmImpMeta4",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(OpmImpMeta4Request $request)
-    {
-        $response = $this->repository->searchPost($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
 }

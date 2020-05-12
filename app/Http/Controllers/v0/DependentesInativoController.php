@@ -37,38 +37,10 @@ class DependentesInativoController extends Controller
     *     ),
     * )
     */
-    public function searchGet(DependentesInativoRequest $request)
+    public function seach(DependentesInativoRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 
-    /**
-    * @OA\Post(
-    *     tags={"DependentesInativo"},
-    *     path="api/v0/DependentesInativo",
-    *     description="Return a list with DependentesInativos",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with DependentesInativo",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(DependentesInativoRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
 }

@@ -37,39 +37,9 @@ class PrivateFunctionsController extends Controller
     *     ),
     * )
     */
-    public function searchGet(PrivateFunctionsRequest $request)
+    public function seach(PrivateFunctionsRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
-
-    /**
-    * @OA\Post(
-    *     tags={"privateFunctions"},
-    *     path="api/v1/privateFunctions",
-    *     description="A list with privateFunctions",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with privateFunctions",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(PrivateFunctionsRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
 }

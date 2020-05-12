@@ -37,38 +37,9 @@ class EfetivoPmprController extends Controller
     *     ),
     * )
     */
-    public function searchGet(EfetivoPmprRequest $request)
+    public function seach(EfetivoPmprRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
-    /**
-    * @OA\Post(
-    *     tags={"EfetivoPmpr"},
-    *     path="api/v0/EfetivoPmpr",
-    *     description="Return a list with EfetivoPmprs",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with EfetivoPmpr",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(EfetivoPmprRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

@@ -37,38 +37,9 @@ class FuncoesPrivativasController extends Controller
     *     ),
     * )
     */
-    public function searchGet(FuncoesPrivativasRequest $request)
+    public function seach(FuncoesPrivativasRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
-    /**
-    * @OA\Post(
-    *     tags={"funcoesPrivativas"},
-    *     path="api/v0/funcoesPrivativas",
-    *     description="Return a list with funcoesPrivativas",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with funcoesPrivativas",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(FuncoesPrivativasRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

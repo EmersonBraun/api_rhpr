@@ -37,38 +37,9 @@ class DependentesAtivaController extends Controller
     *     ),
     * )
     */
-    public function searchGet(DependentesAtivaRequest $request)
+    public function seach(DependentesAtivaRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
-    /**
-    * @OA\Post(
-    *     tags={"dependentesAtiva"},
-    *     path="api/v0/dependentesAtiva",
-    *     description="Return a list with dependentesAtivas",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with dependentesAtiva",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(DependentesAtivaRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 }

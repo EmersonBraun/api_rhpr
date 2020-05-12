@@ -37,39 +37,9 @@ class PolicialHistoricoController extends Controller
     *     ),
     * )
     */
-    public function searchGet(PolicialHistoricoRequest $request)
+    public function seach(PolicialHistoricoRequest $request)
     {
-        $response = $this->repository->searchGet($request->all());
+        $response = $this->repository->seach($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
-
-    /**
-    * @OA\Post(
-    *     tags={"policialHistorico"},
-    *     path="api/v0/policialHistorico",
-    *     description="A list with policialHistorico",
-    *     @OA\Response(
-    *         response=200,
-    *         description="A list with policialHistorico",
-    *     ),
-    *     @OA\Response(
-    *         response=400,
-    *         description="An error happened"
-    *     ),
-    *     @OA\Response(
-    *         response=422,
-    *         description="Missing Data"
-    *     ),
-    *     @OA\Response(
-    *         response=501,
-    *         description="Not implemented"
-    *     ),
-    * )
-    */
-    public function searchPost(PolicialHistoricoRequest $request)
-    {
-        $response = $this->repository->searchPost($request->all());
-        return response()->json($response->data, $response->status, $response->headers, $response->options);
-    }
-
 }

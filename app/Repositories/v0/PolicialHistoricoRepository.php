@@ -27,9 +27,9 @@ class PolicialHistoricoRepository extends BaseRepository
 		$this->model = $model;
     }
 
-    public function searchGet($request, "GET")
+    public function search($request)
     {
-        $page = false,
+        $page = false;
         if (isset($data['page'])) { 
             $page = $data['page']; 
             unset( $data['page']); 
@@ -39,36 +39,7 @@ class PolicialHistoricoRepository extends BaseRepository
             unset( $data['per_page']); 
         }
 
-        $query = $this->service->query($this->model, $request, "GET");
-
-        try{
-            if ($page) $response = $query->paginate($this->perPage, ['*'], 'page', $page);
-            else $response = $query->get();
-
-            $this->returnData = $response ? $response : [];
-            $this->statusCode = 200;
-            $success = true;
-        } catch(\Throwable $th) {
-            $this->errorMessage = $th->getMessage();
-            $success = false;
-        }
-
-        return $this->mountReturn('load', $this->returnData, $this->statusCode, $this->contentError);
-    }
-
-    public function searchPost($request, "POST")
-    {
-        $page = false,
-        if (isset($data['page'])) { 
-            $page = $data['page']; 
-            unset( $data['page']); 
-        }
-        if (isset($data['per_page'])) { 
-            $this->perPage = $data['per_page']; 
-            unset( $data['per_page']); 
-        }
-
-        $query = $this->service->query($this->model, $request, "GET");
+        $query = $this->service->query($this->model, $request, $request->method());
 
         try{
             if ($page) $response = $query->paginate($this->perPage, ['*'], 'page', $page);

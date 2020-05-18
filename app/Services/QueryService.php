@@ -26,14 +26,7 @@ class QueryService {
         foreach ($data as $key => $value) {
             if (in_array($key, $ordenation)) array_push($this->queryOrder,[$key => $value]);
             if (in_array($key, $pagination)) array_push($this->queryPagination,[$key => $value]);
-            if (
-                in_array($key, $fillable) || 
-                in_array($key.'_like', $fillable) || 
-                in_array($key.'_start', $fillable) || 
-                in_array($key.'_send', $fillable)
-                ) {
-                $this->queryData[$key] = $value;
-            }
+            if (in_array($this->cleanKey($key), $fillable)) $this->queryData[$key] = $value;
         }
     }
 
@@ -51,8 +44,8 @@ class QueryService {
                 if (!is_array($value) && !strpos($value, ',')) {
                     $cleanKey = $this->cleanKey($key);
                     $operator = $this->getOperator($key);
-                    $cleanVal = $this->cleanGetValue($value);
-                    $query->where($cleanKey, $operator, $value);
+                    $cleanVal = $this->cleanValue($value);
+                    $query->where($cleanKey, $operator, $cleanVal);
                 }
                 if ($this->verbose == 'GET' && strpos($value, ',')) {
                     $array = explode(',', $value);
@@ -78,6 +71,12 @@ class QueryService {
         return $query;
     }
 
+    public function queryMounted ($query) 
+    {
+        $queryMounted = vsprintf(str_replace(array('?'), array('\'%s\''), $query->toSql()), $query->getBindings());
+        return $queryMounted;
+    }
+
     public function getOrderBy($val)
     {
         $array = strtoupper($this->verbose) == 'GET' ?  explode(',', $val) : $val;
@@ -95,9 +94,9 @@ class QueryService {
     public function cleanKey($key)
     {
         $endString = $this->getEndOfKey($key);
-        if ($endString == 'like') return substr($key, 0, -4);
-        if ($endString == 'start') return substr($key, 0, -5);
-        if ($endString == 'end') return substr($key, 0, -3);
+        if ($endString == 'like') return substr($key, 0, -5);
+        if ($endString == 'start') return substr($key, 0, -6);
+        if ($endString == 'end') return substr($key, 0, -4);
         return $key;
     }
 
@@ -110,8 +109,16 @@ class QueryService {
         return '=';
     }
 
-    public function cleanGetValue($value)
+    public function cleanValue($value)
     {
-        return str_replace('+',' ',$value);
+        $cleanVal = preg_replace(
+            array(
+                '/[,(),;:|!"#$%&=?+^><ªº-]/',
+                '/[^a-z0-9~]/i',
+                '/_+/'
+                ),
+            " ",$value); 
+        $cleanVal = str_replace('~','%',$cleanVal);
+        return $cleanVal;
     }
 }

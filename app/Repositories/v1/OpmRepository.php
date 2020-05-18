@@ -43,7 +43,7 @@ class OpmRepository extends BaseRepository
         }
 
         $query = $this->service->query($this->model, $request->all(), $request->method());
-
+        
         try{
             if ($page) $response = $query->paginate($this->perPage, ['*'], 'page', $page);
             else $response = $query->get();

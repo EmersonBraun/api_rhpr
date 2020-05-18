@@ -111,3 +111,47 @@ Route::group(['prefix' =>'v1'],function(){
         Route::match(['get', 'post'],'',['as' =>'search','uses'=>'v1\PositionController@search']);
     });
 });
+Route::group(['prefix' =>'admin'],function(){
+    Route::group(['as'=>'log.','prefix' =>'log'],function(){
+        Route::get('',['as' =>'index','uses'=>'admin\LogController@index']);
+        Route::post('',['as' =>'store','uses'=>'admin\LogController@store']);
+        Route::get('/{id}',['as' =>'show','uses'=>'admin\LogController@show']);
+        Route::put('/{id}',['as' =>'update','uses'=>'admin\LogController@update']);
+        Route::delete('/{id}',['as' =>'destroy','uses'=>'admin\LogController@destroy']);
+    });
+    Route::group(['as'=>'user.','prefix' =>'user'],function(){
+        Route::get('',['as' =>'index','uses'=>'admin\UserController@index']);
+        Route::post('',['as' =>'store','uses'=>'admin\UserController@store']);
+        Route::get('/{id}',['as' =>'show','uses'=>'admin\UserController@show']);
+        Route::put('/{id}',['as' =>'update','uses'=>'admin\UserController@update']);
+        Route::delete('/{id}',['as' =>'destroy','uses'=>'admin\UserController@destroy']);
+    });
+    Route::group(['as'=>'responsible.','prefix' =>'responsible'],function(){
+        Route::get('',['as' =>'index','uses'=>'admin\ResponsibleController@index']);
+        Route::post('',['as' =>'store','uses'=>'admin\ResponsibleController@store']);
+        Route::get('/{id}',['as' =>'show','uses'=>'admin\ResponsibleController@show']);
+        Route::put('/{id}',['as' =>'update','uses'=>'admin\ResponsibleController@update']);
+        Route::delete('/{id}',['as' =>'destroy','uses'=>'admin\ResponsibleController@destroy']);
+    });
+    Route::group(['as'=>'phone.','prefix' =>'phone'],function(){
+        Route::get('',['as' =>'index','uses'=>'admin\PhoneController@index']);
+        Route::post('',['as' =>'store','uses'=>'admin\PhoneController@store']);
+        Route::get('/{id}',['as' =>'show','uses'=>'admin\PhoneController@show']);
+        Route::put('/{id}',['as' =>'update','uses'=>'admin\PhoneController@update']);
+        Route::delete('/{id}',['as' =>'destroy','uses'=>'admin\PhoneController@destroy']);
+    });
+    Route::group(['as'=>'email.','prefix' =>'email'],function(){
+        Route::get('',['as' =>'index','uses'=>'admin\EmailController@index']);
+        Route::post('',['as' =>'store','uses'=>'admin\EmailController@store']);
+        Route::get('/{id}',['as' =>'show','uses'=>'admin\EmailController@show']);
+        Route::put('/{id}',['as' =>'update','uses'=>'admin\EmailController@update']);
+        Route::delete('/{id}',['as' =>'destroy','uses'=>'admin\EmailController@destroy']);
+    });
+    Route::group(['as'=>'permission.','prefix' =>'permission'],function(){
+        Route::get('',['as' =>'index','uses'=>'admin\PermissionController@index']);
+        Route::post('',['as' =>'store','uses'=>'admin\PermissionController@store']);
+        Route::get('/{id}',['as' =>'show','uses'=>'admin\PermissionController@show']);
+        Route::put('/{id}',['as' =>'update','uses'=>'admin\PermissionController@update']);
+        Route::delete('/{id}',['as' =>'destroy','uses'=>'admin\PermissionController@destroy']);
+    });
+});

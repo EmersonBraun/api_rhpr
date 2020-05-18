@@ -50,6 +50,20 @@ function EnterTerminal () {
     docker-compose exec workspace bash
 }
 
+function PgAdmin () {
+    echo -e "${GREEN}Give perminssions to folder${NC}"
+    chmod 777 -R ~/.laradock/data/pgadmin/
+    cd laradock/
+    echo -e "${GREEN}Up pgadmin${NC}"
+    docker-compose up -d pgadmin
+}
+
+function PS () {
+    cd laradock/
+    echo -e "${GREEN}List containers${NC}"
+    docker-compose ps
+}
+
 function GetModule () {
     cd app/Console
     echo -e "${GREEN}Clone module generator${NC}"
@@ -69,6 +83,10 @@ elif [ $1 = "terminal" ]; then
     EnterTerminal
 elif [ $1 = "module" ]; then
     GetModule
+elif [ $1 = "pgadmin" ]; then
+    PgAdmin
+elif [ $1 = "ps" ]; then
+    PS
 else
     echo -e "$1 ${RED}it's an invalid option${NC}"
     exit 1

@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
+use Faker\Factory as FakerFactory;
 use Illuminate\Support\Str;
 
 use App\Models\v0\OpmPmpr;
@@ -18,20 +19,21 @@ use App\Models\v0\OpmPmpr;
 | Consult database/factories/Faker.md to see the available fakers 
 |
 */
+$fakerBR = FakerFactory::create('pt_BR');
 
-$factory->define(OpmPmpr::class, function (Faker $faker) {
+$factory->define(OpmPmpr::class, function (Faker $faker) use($fakerBR){
     return [
         'META4' => 'W'.$faker->randomNumber(6),
         'NOME_META4' => $faker->name,
         'CODIGO' => $faker->randomNumber(9),
         'DESCRICAO' => $faker->text(5),
-        'ABREVIATURA' => $faker->text(3),
+        'ABREVIATURA' => $faker->text(5),
         'TIPO' => $faker->randomElement(['OP','ADM']),
         'MUNICIPIO' => $faker->city,
         'CDMUNICIPIO' => $faker->randomNumber(3),
         'TITULO' => $faker->randomElement(['SECAO','OPM','GRUPAMENTO']),
         'CODIGOBASE' => $faker->randomNumber(9),
         'CODIGONOVO' => $faker->randomNumber(9),
-        'TELEFONE' => $faker->phone
+        'TELEFONE' => $fakerBR->phone
     ];
 });

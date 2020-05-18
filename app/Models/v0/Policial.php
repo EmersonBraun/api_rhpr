@@ -18,7 +18,7 @@ class Policial extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'id_meta4';
+    protected $primaryKey = 'ID_META4';
 
     /**
      * The attributes that are mass assignable.

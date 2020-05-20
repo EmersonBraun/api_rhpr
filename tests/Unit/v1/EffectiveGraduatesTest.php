@@ -19,9 +19,14 @@ class EffectiveGraduatesTest extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v1';
+	protected $route = 'effective_graduates';
 	public function testEffectiveGraduatesSearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -31,7 +36,10 @@ class EffectiveGraduatesTest extends TestCase
 	 */
 	public function testEffectiveGraduatesSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 	/** @test 
@@ -41,7 +49,10 @@ class EffectiveGraduatesTest extends TestCase
 	 */
 	public function testEffectiveGraduatesSearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -51,7 +62,10 @@ class EffectiveGraduatesTest extends TestCase
 	 */
 	public function testEffectiveGraduatesSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 }

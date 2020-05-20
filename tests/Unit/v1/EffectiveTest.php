@@ -19,9 +19,14 @@ class EffectiveTest extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v1';
+	protected $route = 'effective';
 	public function testEffectiveSearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -31,7 +36,10 @@ class EffectiveTest extends TestCase
 	 */
 	public function testEffectiveSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 	/** @test 
@@ -41,7 +49,10 @@ class EffectiveTest extends TestCase
 	 */
 	public function testEffectiveSearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -51,7 +62,10 @@ class EffectiveTest extends TestCase
 	 */
 	public function testEffectiveSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 }

@@ -4,7 +4,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\v0\Inativo;
 
-class InativosTableSeeder extends Seeder
+class InativoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

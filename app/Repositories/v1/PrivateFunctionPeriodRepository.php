@@ -2,7 +2,7 @@
 
 namespace App\Repositories\v1;
 
-use App\Models\v1\PrivateFunctionsPeriod;
+use App\Models\v1\PrivateFunctionPeriod;
 use App\Repositories\BaseRepository;
 
 use App\Traits\ResponseTrait;
@@ -10,7 +10,7 @@ use App\Services\QueryService;
 /**
 * Repository Pattern allows encapsulation of data access logic
 */
-class PrivateFunctionsPeriodRepository extends BaseRepository
+class PrivateFunctionPeriodRepository extends BaseRepository
 {
     use ResponseTrait;
 
@@ -24,7 +24,7 @@ class PrivateFunctionsPeriodRepository extends BaseRepository
     protected $options = 0;
     protected $perPage = 25;
     
-	public function __construct( PrivateFunctionsPeriod $model,  QueryService $service )
+	public function __construct( PrivateFunctionPeriod $model,  QueryService $service )
 	{
 		$this->model = $model;
 		$this->service = $service;

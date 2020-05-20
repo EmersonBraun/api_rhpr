@@ -19,9 +19,14 @@ class OpmImpMeta4Test extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v0';
+	protected $route = 'opm_imp_meta4';
 	public function testOpmImpMeta4SearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -31,7 +36,10 @@ class OpmImpMeta4Test extends TestCase
 	 */
 	public function testOpmImpMeta4SearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 	/** @test 
@@ -41,7 +49,10 @@ class OpmImpMeta4Test extends TestCase
 	 */
 	public function testOpmImpMeta4SearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -51,7 +62,10 @@ class OpmImpMeta4Test extends TestCase
 	 */
 	public function testOpmImpMeta4SearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 }

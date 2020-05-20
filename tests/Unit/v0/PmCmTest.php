@@ -19,9 +19,14 @@ class PmCmTest extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v0';
+	protected $route = 'pm_cm';
 	public function testPmCmSearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -31,7 +36,10 @@ class PmCmTest extends TestCase
 	 */
 	public function testPmCmSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 	/** @test 
@@ -41,7 +49,10 @@ class PmCmTest extends TestCase
 	 */
 	public function testPmCmSearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -51,7 +62,10 @@ class PmCmTest extends TestCase
 	 */
 	public function testPmCmSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 }

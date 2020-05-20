@@ -19,9 +19,14 @@ class FuncoesPrivativasTest extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v0';
+	protected $route = 'funcoes_privativas';
 	public function testFuncoesPrivativasSearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -31,7 +36,10 @@ class FuncoesPrivativasTest extends TestCase
 	 */
 	public function testFuncoesPrivativasSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 	/** @test 
@@ -41,7 +49,10 @@ class FuncoesPrivativasTest extends TestCase
 	 */
 	public function testFuncoesPrivativasSearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -51,7 +62,10 @@ class FuncoesPrivativasTest extends TestCase
 	 */
 	public function testFuncoesPrivativasSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200);  
 	}
 
 }

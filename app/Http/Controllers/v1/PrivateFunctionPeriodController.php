@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\v0;
+namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v0\InativosRequest;
-use App\Repositories\v0\InativosRepository;
+use App\Http\Requests\v1\PrivateFunctionPeriodRequest;
+use App\Repositories\v1\PrivateFunctionPeriodRepository;
 
-class InativosController extends Controller
+class PrivateFunctionPeriodController extends Controller
 {
     protected $repository;
-    public function __construct(InativosRepository $repository)
+    public function __construct(PrivateFunctionPeriodRepository $repository)
 	{
         $this->repository = $repository;
     }
 
     /**
     * @OA\Get(
-    *     tags={"inativos"},
-    *     path="api/v0/inativos",
-    *     description="Return a list with inativos",
+    *     tags={"privateFunctionPeriod"},
+    *     path="api/v1/privateFunctionPeriod",
+    *     description="Return a list with privateFunctionPeriod",
     *     @OA\Response(
     *         response=200,
-    *         description="A list with inativos",
+    *         description="A list with privateFunctionPeriod",
     *     ),
     *     @OA\Response(
     *         response=400,
@@ -37,7 +37,7 @@ class InativosController extends Controller
     *     ),
     * )
     */
-    public function search(InativosRequest $request)
+    public function search(PrivateFunctionPeriodRequest $request)
     {
         $response = $this->repository->search($request);
         return response()->json($response->data, $response->status, $response->headers, $response->options);

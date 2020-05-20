@@ -20,7 +20,7 @@ class EfetivoPmprTest extends TestCase
 	 * @return void
 	 */
 	protected $baseApi = '/api/v0';
-	protected $route = 'ausencia';
+	protected $route = 'efetivo_pmpr';
 	public function testEfetivoPmprSearchGetWithErrorTest()
 	{
         $response = $this->get("{$this->baseApi}/{$this->route}s");
@@ -36,7 +36,10 @@ class EfetivoPmprTest extends TestCase
 	 */
 	public function testEfetivoPmprSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 	/** @test 
@@ -46,7 +49,7 @@ class EfetivoPmprTest extends TestCase
 	 */
 	public function testEfetivoPmprSearchPostWithErrorTest()
 	{
-        $response = $this->get("{$this->baseApi}/{$this->route}s");
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
 		$response
 			->assertStatus(404)
 			->assertJson([]);
@@ -59,7 +62,10 @@ class EfetivoPmprTest extends TestCase
 	 */
 	public function testEfetivoPmprSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 }

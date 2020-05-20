@@ -2,7 +2,7 @@
 
 namespace App\Repositories\v0;
 
-use App\Models\v0\Inativos;
+use App\Models\v0\Inativo;
 use App\Repositories\BaseRepository;
 
 use App\Traits\ResponseTrait;
@@ -10,7 +10,7 @@ use App\Services\QueryService;
 /**
 * Repository Pattern allows encapsulation of data access logic
 */
-class InativosRepository extends BaseRepository
+class InativoRepository extends BaseRepository
 {
     use ResponseTrait;
 
@@ -24,7 +24,7 @@ class InativosRepository extends BaseRepository
     protected $options = 0;
     protected $perPage = 25;
     
-	public function __construct( Inativos $model,  QueryService $service )
+	public function __construct( Inativo $model,  QueryService $service )
 	{
 		$this->model = $model;
 		$this->service = $service;

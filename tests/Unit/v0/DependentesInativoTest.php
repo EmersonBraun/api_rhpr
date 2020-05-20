@@ -20,7 +20,7 @@ class DependentesInativoTest extends TestCase
 	 * @return void
 	 */
 	protected $baseApi = '/api/v0';
-	protected $route = 'ausencia';
+	protected $route = 'dependentes_inativo';
 	public function testDependentesInativoSearchGetWithErrorTest()
 	{
         $response = $this->get("{$this->baseApi}/{$this->route}s");
@@ -36,7 +36,10 @@ class DependentesInativoTest extends TestCase
 	 */
 	public function testDependentesInativoSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 	/** @test 
@@ -59,7 +62,10 @@ class DependentesInativoTest extends TestCase
 	 */
 	public function testDependentesInativoSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 }

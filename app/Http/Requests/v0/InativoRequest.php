@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\v1;
+namespace App\Http\Requests\v0;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
@@ -10,7 +10,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ResponseTrait;
 
-class PrivateFunctionsPeriodRequest extends FormRequest
+class InativoRequest extends FormRequest
 {
     use ResponseTrait;
     /**

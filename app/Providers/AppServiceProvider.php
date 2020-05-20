@@ -61,8 +61,8 @@ use App\Models\v1\Position;
 use App\Observers\v1\PositionObserver;
 use App\Models\v1\PrivateFunction;
 use App\Observers\v1\PrivateFunctionObserver;
-use App\Models\v1\PrivateFunctionsPeriod;
-use App\Observers\v1\PrivateFunctionsPeriodObserver;
+use App\Models\v1\PrivateFunctionPeriod;
+use App\Observers\v1\PrivateFunctionPeriodObserver;
 use App\Models\v1\Reservation;
 use App\Observers\v1\ReservationObserver;
 
@@ -127,7 +127,7 @@ class AppServiceProvider extends ServiceProvider
         Opm::observe(OpmObserver::class);
         Position::observe(PositionObserver::class);
         PrivateFunction::observe(PrivateFunctionObserver::class);
-        PrivateFunctionsPeriod::observe(PrivateFunctionsPeriodObserver::class);
+        PrivateFunctionPeriod::observe(PrivateFunctionPeriodObserver::class);
         Reservation::observe(ReservationObserver::class);
 
         Email::observe(EmailObserver::class);

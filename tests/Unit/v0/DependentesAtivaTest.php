@@ -20,7 +20,7 @@ class DependentesAtivaTest extends TestCase
 	 * @return void
 	 */
 	protected $baseApi = '/api/v0';
-	protected $route = 'ausencia';
+	protected $route = 'dependentes_ativa';
 	public function testDependentesAtivaSearchGetWithErrorTest()
 	{
         $response = $this->get("{$this->baseApi}/{$this->route}s");
@@ -36,7 +36,10 @@ class DependentesAtivaTest extends TestCase
 	 */
 	public function testDependentesAtivaSearchGetTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 	/** @test 
@@ -59,6 +62,9 @@ class DependentesAtivaTest extends TestCase
 	 */
 	public function testDependentesAtivaSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 }

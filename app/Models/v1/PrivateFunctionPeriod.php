@@ -4,14 +4,14 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PrivateFunctionsPeriod extends Model
+class PrivateFunctionPeriod extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'private_functions_periods';
+    protected $table = 'private_function_periods';
 
      /**
      * The primary key associated with the table.

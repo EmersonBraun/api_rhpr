@@ -83,8 +83,8 @@ Route::group(['prefix' =>'v1'],function(){
     Route::group(['as'=>'private_functions.','prefix' =>'private_functions'],function(){
         Route::match(['get', 'post'],'',['as' =>'search','uses'=>'v1\PrivateFunctionController@search']);
     });
-    Route::group(['as'=>'private_functions_periods.','prefix' =>'private_functions_periods'],function(){
-        Route::match(['get', 'post'],'',['as' =>'search','uses'=>'v1\PrivateFunctionsPeriodController@search']);
+    Route::group(['as'=>'private_function_periods.','prefix' =>'private_function_periods'],function(){
+        Route::match(['get', 'post'],'',['as' =>'search','uses'=>'v1\PrivateFunctionPeriodController@search']);
     });
     Route::group(['as'=>'inactive.','prefix' =>'inactive'],function(){
         Route::match(['get', 'post'],'',['as' =>'search','uses'=>'v1\InactiveController@search']);

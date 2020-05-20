@@ -4,7 +4,7 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Privatefunctionsperiod extends Model
+class PrivateFunctionsPeriod extends Model
 {
     /**
      * The table associated with the model.

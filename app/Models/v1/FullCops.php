@@ -4,7 +4,7 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Fullcops extends Model
+class FullCops extends Model
 {
     /**
      * The table associated with the model.

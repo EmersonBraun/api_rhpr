@@ -1,13 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\v0;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\Models\Ausencia;
 use App\Repositories\AusenciaRepository;
 
-class AusenciaUnitTest extends TestCase
+class AusenciaTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -16,9 +19,14 @@ class AusenciaUnitTest extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v0';
+	protected $route = 'ausencia';
 	public function testAusenciaSearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+		$response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -28,7 +36,10 @@ class AusenciaUnitTest extends TestCase
 	 */
 	public function testAusenciaSearchGetTest()
 	{
-        $this->assertTrue(true); 
+		$response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 
 	/** @test 
@@ -38,7 +49,10 @@ class AusenciaUnitTest extends TestCase
 	 */
 	public function testAusenciaSearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->post("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -48,6 +62,9 @@ class AusenciaUnitTest extends TestCase
 	 */
 	public function testAusenciaSearchPostTest()
 	{
-        $this->assertTrue(true); 
+        $response = $this->post("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+        $response->assertStatus(200); 
 	}
 }

@@ -1,13 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\v0;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\Models\v0\EfetivoPracas;
 use App\Repositories\v0\EfetivoPracasRepository;
 
-class EfetivoPracasUnitTest extends TestCase
+class EfetivoPracasTest extends TestCase
 {
     use DatabaseMigrations;
  
@@ -16,9 +19,14 @@ class EfetivoPracasUnitTest extends TestCase
 	 *
 	 * @return void
 	 */
+	protected $baseApi = '/api/v0';
+	protected $route = 'ausencia';
 	public function testEfetivoPracasSearchGetWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -38,7 +46,10 @@ class EfetivoPracasUnitTest extends TestCase
 	 */
 	public function testEfetivoPracasSearchPostWithErrorTest()
 	{
-        $this->assertTrue(true);
+        $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 

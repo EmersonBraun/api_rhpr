@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\v0;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v0\DependentesInativoRequest;

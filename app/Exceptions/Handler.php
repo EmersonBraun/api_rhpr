@@ -50,6 +50,40 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        if($this->isHttpException($exception)) {
+            $data = [];
+            $route = $request->path();
+            $statusCode = intval($exception->getStatusCode());
+            switch ($statusCode) {
+                case 401:
+                    $headers = $this->mountHeader('Not authenticated', $route);
+                    return response()->json($data, $statusCode, $headers);
+                    break;
+                case 403:
+                    $headers = $this->mountHeader('You do not have access to this feature, contact your system administrator', $route);
+                    return response()->json($data, $statusCode, $headers);
+                    break;
+                case 404:
+                    $headers = $this->mountHeader('Not found', $route);
+                    return response()->json($data, $statusCode, $headers);
+                    break;
+                default:
+                    return parent::render($request, $exception);
+                break;
+                    
+            }
+        } else {
+            return parent::render($request, $exception);
+        }
+    }
+
+    public function mountHeader($message='error', $route)
+    {
+        $content = "error accessing a route $route";
+        return [
+            'returnType' => 'error',
+            'message' => $message,
+            'contentError' => $content,
+        ];
     }
 }

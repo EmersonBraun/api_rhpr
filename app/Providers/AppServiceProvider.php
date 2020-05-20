@@ -66,6 +66,19 @@ use App\Observers\v1\PrivateFunctionsPeriodObserver;
 use App\Models\v1\Reservation;
 use App\Observers\v1\ReservationObserver;
 
+use App\Models\Admin\Email;
+use App\Observers\Admin\EmailObserver;
+use App\Models\Admin\Log;
+use App\Observers\Admin\LogObserver;
+use App\Models\Admin\Permission;
+use App\Observers\Admin\PermissionObserver;
+use App\Models\Admin\Phone;
+use App\Observers\Admin\PhoneObserver;
+use App\Models\Admin\User;
+use App\Observers\Admin\UserObserver;
+use App\Models\Admin\System;
+use App\Observers\Admin\SystemObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -116,5 +129,12 @@ class AppServiceProvider extends ServiceProvider
         PrivateFunction::observe(PrivateFunctionObserver::class);
         PrivateFunctionsPeriod::observe(PrivateFunctionsPeriodObserver::class);
         Reservation::observe(ReservationObserver::class);
+
+        Email::observe(EmailObserver::class);
+        Log::observe(LogObserver::class);
+        Permission::observe(PermissionObserver::class);
+        Phone::observe(PhoneObserver::class);
+        User::observe(UserObserver::class);
+        System::observe(SystemObserver::class);
     }
 }

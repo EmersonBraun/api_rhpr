@@ -1,13 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\v0;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\Models\v0\FuncPriv;
 use App\Repositories\v0\FuncPrivRepository;
 
-class FuncPrivUnitTest extends TestCase
+class FuncPrivTest extends TestCase
 {
     use DatabaseMigrations;
  

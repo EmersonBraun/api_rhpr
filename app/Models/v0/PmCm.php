@@ -4,7 +4,7 @@ namespace App\Models\v0;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pmcm extends Model
+class PmCm extends Model
 {
     /**
      * The table associated with the model.

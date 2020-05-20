@@ -26,6 +26,12 @@ class DatabaseSeeder extends Seeder
             PolicialHistoricoTableSeeder::class,
             PostoTableSeeder::class,
             ReservaTableSeeder::class,
+            SystemTableSeeder::class,
+            LogTableSeeder::class,
+            UserTableSeeder::class,
+            PhoneTableSeeder::class,
+            EmailTableSeeder::class,
+            PermissionTableSeeder::class,
         ]);
     }
 }

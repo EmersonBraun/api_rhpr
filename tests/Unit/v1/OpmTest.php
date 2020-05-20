@@ -1,13 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\v1;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\Models\v1\Opm;
 use App\Repositories\v1\OpmRepository;
 
-class OpmUnitTest extends TestCase
+class OpmTest extends TestCase
 {
     use DatabaseMigrations;
  

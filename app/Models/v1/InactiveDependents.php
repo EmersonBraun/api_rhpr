@@ -4,7 +4,7 @@ namespace App\Models\v1;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Inactivedependents extends Model
+class InactiveDependents extends Model
 {
     /**
      * The table associated with the model.

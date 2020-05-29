@@ -31,7 +31,9 @@ class PhoneRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required'
+            'type_phone' => 'required',
+            'number'=> 'required',
+            'user_id' => 'required|exists:users,id'
         ];
     }
 

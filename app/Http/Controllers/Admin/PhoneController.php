@@ -66,7 +66,7 @@ class PhoneController extends Controller
     *     ),
     * )
     */
-    public function store(Admin\PhoneRequest $request)
+    public function store(PhoneRequest $request)
     {
         $response = $this->repository->create($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
@@ -103,7 +103,7 @@ class PhoneController extends Controller
     */
     public function show($id)
     {
-        $response = $this->repository->findOrFail($id);
+        $response = $this->repository->getWithUsers($id);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 
@@ -136,7 +136,7 @@ class PhoneController extends Controller
     *     ),
     * )
     */
-    public function update(Admin\PhoneRequest $request, $id)
+    public function update(PhoneRequest $request, $id)
     {
         $response = $this->repository->findAndUpdate($id, $request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);

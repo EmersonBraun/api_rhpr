@@ -59,4 +59,8 @@ class Phone extends Model
      */
     protected $dates = [];
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Admin\User');
+    }
 }

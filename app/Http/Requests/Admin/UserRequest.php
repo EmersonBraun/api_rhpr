@@ -10,6 +10,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ResponseTrait;
 
+use App\Rules\Cpf;
+
 class UserRequest extends FormRequest
 {
     use ResponseTrait;
@@ -30,8 +32,14 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->method() == 'POST') $this->typeFunction = 'create';
+        if ($this->method() == 'PUT') $this->typeFunction = 'update';
         return [
-            // 'name' => 'required'
+            'name' => 'required',
+            'rg' => 'required',
+            'cpf' => ['required', new Cpf],
+            'workplace' => 'required',
+            'system_id' => 'required|exists:systems,id'
         ];
     }
 
@@ -59,7 +67,7 @@ class UserRequest extends FormRequest
     {
         $errors = (new ValidationException($validator))->errors();
         $code = JsonResponse::HTTP_UNPROCESSABLE_ENTITY;
-        $response = $this->mountReturn('load', [], $code, $errors);
+        $response = $this->mountReturn($this->typeFunction, [], $code, $errors);
         throw new HttpResponseException(response()->json($response->data, $response->status, $response->headers));
     }
 }

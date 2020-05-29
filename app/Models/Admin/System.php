@@ -61,4 +61,8 @@ class System extends Model
      */
     protected $dates = [];
 
+    public function users()
+    {
+        return $this->hasMany('App\Models\Admin\User');
+    }
 }

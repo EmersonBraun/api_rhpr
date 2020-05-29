@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller\Admin;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PermissionRequest;
 use App\Repositories\Admin\PermissionRepository;
 
@@ -66,7 +66,7 @@ class PermissionController extends Controller
     *     ),
     * )
     */
-    public function store(Admin\PermissionRequest $request)
+    public function store(PermissionRequest $request)
     {
         $response = $this->repository->create($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
@@ -103,7 +103,7 @@ class PermissionController extends Controller
     */
     public function show($id)
     {
-        $response = $this->repository->findOrFail($id);
+        $response = $this->repository->getWithUsers($id);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 
@@ -136,7 +136,7 @@ class PermissionController extends Controller
     *     ),
     * )
     */
-    public function update(Admin\PermissionRequest $request, $id)
+    public function update(PermissionRequest $request, $id)
     {
         $response = $this->repository->findAndUpdate($id, $request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);

@@ -14,12 +14,6 @@ class LogRepository extends BaseRepository
     use ResponseTrait;
 
     protected $model;
-    protected $obj = [];
-    protected $returnType = 'error';
-    protected $returnMsg = '';
-    protected $returnContent = '';
-    protected $statusCode = 400;
-    protected $options = 0;
     
 	public function __construct( Log $model )
 	{

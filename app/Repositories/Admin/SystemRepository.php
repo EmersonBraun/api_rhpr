@@ -14,33 +14,23 @@ class SystemRepository extends BaseRepository
     use ResponseTrait;
 
     protected $model;
-    protected $obj = [];
-    protected $returnType = 'error';
-    protected $returnMsg = '';
-    protected $returnContent = '';
-    protected $statusCode = 400;
-    protected $options = 0;
     
 	public function __construct( System $model )
 	{
 		$this->model = $model;
     }
 
-    /**
-     * Example of expecific action from SystemRepositorie.
-     * CRUD functions are inherited from BaseRepository
-     *
-     * @return array
-     */
-    public function example($foo, $bar)
+    public function getWithUsers($id)
     {
         try{
-            $this->obj = $this->model->where(['name'=> $foo, 'age' => $bar])->get();
+            $this->obj = $this->model->where('id',$id)->with('users')->get();
+            $response = $this->obj ?? [];
             $this->statusCode = 200;
         } catch(\Throwable $th) {
-            $this->returnContent = $th->getMessage();
+            $this->contentError = $th->getMessage();
+            $response = [];
         }
-        $typeFunction = 'load'; // may load,found,create,update,delete,restore or forceDelete
-        return $this->mountReturn($typeFunction, $this->obj, $this->statusCode, $this->contentError);
+
+        return $this->mountReturn('load', $response, $this->statusCode, $this->contentError);
     }
 }

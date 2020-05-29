@@ -30,9 +30,20 @@ class EmailRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            // 'name' => 'required'
-        ];
+        if ($this->method() == 'POST') {
+            $this->typeFunction = 'create';
+            return [
+                'email' => 'required|email|unique:emails,email',
+                'user_id' => 'required|exists:users,id'
+            ];
+        } 
+        if ($this->method() == 'PUT') {
+            $this->typeFunction = 'update';
+            return [
+                'email' => 'required|email',
+                'user_id' => 'required|exists:users,id'
+            ];
+        }
     }
 
     /**
@@ -59,7 +70,7 @@ class EmailRequest extends FormRequest
     {
         $errors = (new ValidationException($validator))->errors();
         $code = JsonResponse::HTTP_UNPROCESSABLE_ENTITY;
-        $response = $this->mountReturn('load', [], $code, $errors);
+        $response = $this->mountReturn($this->typeFunction, [], $code, $errors);
         throw new HttpResponseException(response()->json($response->data, $response->status, $response->headers));
     }
 }

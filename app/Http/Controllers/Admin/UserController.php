@@ -66,9 +66,13 @@ class UserController extends Controller
     *     ),
     * )
     */
-    public function store(Admin\UserRequest $request)
+    public function store(UserRequest $request)
     {
         $response = $this->repository->create($request->all());
+        if (isset($request->permissions)) {
+            $assyncPermissions = $this->repository->assyncPermissions($request->permissions, $id);
+            array_push($response->headers, $assyncPermissions);
+        }
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 
@@ -103,7 +107,7 @@ class UserController extends Controller
     */
     public function show($id)
     {
-        $response = $this->repository->findOrFail($id);
+        $response = $this->repository->getAllData($id);
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 
@@ -136,9 +140,13 @@ class UserController extends Controller
     *     ),
     * )
     */
-    public function update(Admin\UserRequest $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $response = $this->repository->findAndUpdate($id, $request->all());
+        if (isset($request->permissions)) {
+            $assyncPermissions = $this->repository->assyncPermissions($request->permissions, $id);
+            array_push($response->headers, $assyncPermissions);
+        }
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 

@@ -66,7 +66,7 @@ class LogController extends Controller
     *     ),
     * )
     */
-    public function store(Admin\LogRequest $request)
+    public function store(LogRequest $request)
     {
         $response = $this->repository->create($request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);
@@ -136,7 +136,7 @@ class LogController extends Controller
     *     ),
     * )
     */
-    public function update(Admin\LogRequest $request, $id)
+    public function update(LogRequest $request, $id)
     {
         $response = $this->repository->findAndUpdate($id, $request->all());
         return response()->json($response->data, $response->status, $response->headers, $response->options);

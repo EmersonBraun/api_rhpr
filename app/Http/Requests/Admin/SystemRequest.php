@@ -10,7 +10,9 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ResponseTrait;
 
-class ResponsibleRequest extends FormRequest
+use App\Rules\IpPMPR;
+
+class SystemRequest extends FormRequest
 {
     use ResponseTrait;
     /**
@@ -31,7 +33,8 @@ class ResponsibleRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required'
+            'system' => 'required|unique:systems,system',
+            'ip' => ['required', new IpPMPR]
         ];
     }
 

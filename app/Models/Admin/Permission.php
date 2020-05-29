@@ -57,4 +57,9 @@ class Permission extends Model
      */
     protected $dates = [];
 
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\Admin\User', 'user_has_permissions');
+    }
+
 }

@@ -51,6 +51,13 @@ class User extends Model
     protected $casts = [];
 
     /**
+     * The attributes don't list.
+     *
+     * @var array
+     */
+    protected $hidden = ['password'];
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -63,5 +70,25 @@ class User extends Model
      * @var array
      */
     protected $dates = [];
+
+    public function systems()
+    {
+        return $this->belongsTo('App\Models\Admin\System');
+    }
+
+    public function phones()
+    {
+        return $this->hasMany('App\Models\Admin\Phone');
+    }
+
+    public function emails()
+    {
+        return $this->hasMany('App\Models\Admin\Email');
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Admin\Permission', 'user_has_permissions');
+    }
 
 }

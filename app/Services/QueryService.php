@@ -1,21 +1,29 @@
 <?php
 namespace App\Services;
 
+use App\Traits\ResponseTrait;
+
 class QueryService {
+    use ResponseTrait;
 
     protected $queryOrder = [];
     protected $queryPagination = [];
     protected $queryData = [];
     protected $model;
     protected $verbose;
+    protected $page = false;
+    protected $perPage = 10;
 
-    public function query($model, $data, $verbose='GET') 
+    public function query($model, $data, $verbose='GET', $noExecute=false) 
     {
         $this->sanitizeModel($model);
+        $page = $this->sanitizePages($data);
         $this->sanitizeData($data);
         $this->verbose = $verbose;
         $query = $this->mountQuery();
-        return $query;
+        if ($noExecute) return $query;
+        $execute = $this->execute($query, $page);
+        return $execute;
     }
 
     public function sanitizeData($data) 
@@ -35,6 +43,20 @@ class QueryService {
         // if ($model instanceof Eloquent\Builder) $this->model = $model;
         // else 
         $this->model = $model;
+    }
+
+    public function sanitizePages($data) 
+    {
+        if (isset($data['page'])) { 
+            $this->page = $data['page']; 
+            unset( $data['page']); 
+        }
+        if (isset($data['per_page'])) { 
+            $this->perPage = $data['per_page']; 
+            unset( $data['per_page']); 
+        }
+        if ($this->page) return (object) ['number' => $this->page, 'perPage' => $this->perPage];
+        return false;
     }
     
     public function mountQuery () {
@@ -113,12 +135,25 @@ class QueryService {
     {
         $cleanVal = preg_replace(
             array(
-                '/[,(),;:|!"#$%&=?+^><ªº-]/',
+                '/[,(),;:|!"#$&=?+^><ªº-]/',
                 '/[^a-z0-9~]/i',
                 '/_+/'
                 ),
             " ",$value); 
         $cleanVal = str_replace('~','%',$cleanVal);
         return $cleanVal;
+    }
+
+    public function execute($query, $page=false)
+    {
+        try{
+            if (isset($page->number)) $response = $query->paginate($page->perPage, ['*'], 'page', $page->number);
+            else $response = $query->get();
+
+            $this->returnData = $response ? $response : [];
+            return $this->successResponse($this->returnData, 'Success', 200);
+        } catch(\Throwable $th) {
+            return $this->failedResponse('Error', 400, $th->getMessage());
+        }
     }
 }

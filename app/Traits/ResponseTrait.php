@@ -84,17 +84,12 @@ trait ResponseTrait
      *
      * @return string
      */
-    public function failedResponse($message='', $status=400, $contentError='', $options=[])
+    public function failedResponse($message='', $status=400, $contentError='', $options=0)
     {
-        $content = $this->getContentError($contentError);
         return (object) [
             'data' => [],
             'status' => $status,
-            'headers' => [
-                'returnType' => 'error',
-                'message' => $message,
-                'contentError' => $content,
-            ],
+            'headers' => $this->mountHeader('error', $message, $contentError),
             'options' => $options
         ];
     }
@@ -104,17 +99,28 @@ trait ResponseTrait
      *
      * @return string
      */
-    public function successResponse($data, $message='', $status=200, $options=[])
+    public function successResponse($data, $message='', $status=200, $options=0)
     {
         return (object) [
             'data' => $data,
             'status' => $status,
-            'headers' => [
-                'returnType' => 'success',
-                'message' => $message,
-                'contentError' => null,
-            ],
+            'headers' => $this->mountHeader('success', $message, null),
             'options' => $options
+        ];
+    }
+
+    /**
+     * mountHeader
+     *
+     * @return string
+     */
+    public function mountHeader($type='success', $message='Success', $error=false)
+    {
+        $contentError = $error ? $this->getContentError($error) : '';
+        return [
+                'returnType' => $type,
+                'message' => $message,
+                'contentError' => $contentError
         ];
     }
 }

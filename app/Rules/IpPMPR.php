@@ -47,7 +47,7 @@ class IpPMPR implements Rule
     {
         $ipParts = explode('.', $ip);
         if (!$ipParts[0] || intval($ipParts[0]) !== 10) return false;
-        if (count($ipParts) < 4 || strlen($ipParts[1]) < 3 || strlen($ipParts[2]) < 3) {
+        if (count($ipParts) < 4 || strlen($ipParts[1]) < 2 || strlen($ipParts[2]) < 2) {
             $this->msg = 'The ip must be 4 parts in this format (xx.xxx.xxx.xx?)';
             return false;
         }

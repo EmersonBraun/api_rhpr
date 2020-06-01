@@ -10,6 +10,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ResponseTrait;
 
+use App\Rules\IpPMPR;
+
 class LogRequest extends FormRequest
 {
     use ResponseTrait;
@@ -31,7 +33,11 @@ class LogRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required'
+            'system_name' => 'required',
+            'ip' => ['required', new IpPMPR],
+            'url' => 'required',
+            'query' => 'required',
+            'status_request' => 'required'
         ];
     }
 

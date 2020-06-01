@@ -35,7 +35,7 @@ trait ResponseTrait
      */
     public function validateParams($typeFunction, $data, $status, $showMessage)
     {
-        $typesFunctions = ['load','found','create','update','delete' ,'restore','forceDelete'];
+        $typesFunctions = ['login','load','found','create','update','delete' ,'restore','forceDelete'];
         if (!in_array($typeFunction, $typesFunctions)) return "Invalid typeFunction expected ".implode(',',$typesFunctions);
         if (!is_int($status)) return "Invalid status expected Int";
         // if (!is_array($data) || !is_object($data)) return "Invalid data expected Array or Object";

@@ -10,9 +10,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ResponseTrait;
 
-use App\Rules\Cpf;
-
-class UserRequest extends FormRequest
+class AuthRequest extends FormRequest
 {
     use ResponseTrait;
     /**
@@ -32,27 +30,11 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method() == 'POST') {
-            $this->typeFunction = 'create';
-            return [
-                'name' => 'required',
-                'rg' => 'required|unique:users,rg',
-                'password' => 'required',
-                'cpf' => ['required', new Cpf],
-                'workplace' => 'required',
-                'system_id' => 'required|exists:systems,id'
-            ];
-        }
-        if ($this->method() == 'PUT') {
-            $this->typeFunction = 'update';
-            return [
-                'name' => 'required',
-                'rg' => 'required|unique:users,rg',
-                'cpf' => ['required', new Cpf],
-                'workplace' => 'required',
-                'system_id' => 'required|exists:systems,id'
-            ];
-        }
+        $this->typeFunction = 'login';
+        return [
+            'rg' => 'required',
+            'password' => 'required',
+        ];
     }
 
     /**

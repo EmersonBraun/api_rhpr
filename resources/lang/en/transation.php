@@ -2,6 +2,11 @@
 
 return [
 
+    'login' => [
+        'success' => 'Logged',
+        'error' => 'Not Logged',
+    ],
+
     'load' => [
         'success' => 'loaded',
         'error' => 'Not loaded',

@@ -23,6 +23,7 @@ class UserTable extends Migration
             $table->boolean('blocked')->default(false);
             $table->boolean('reset')->default(true);
             $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
             $table->unsignedBigInteger('system_id');
 
             $table->foreign('system_id')->references('id')->on('systems')->onDelete('cascade');

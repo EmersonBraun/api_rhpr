@@ -7,7 +7,7 @@ return [
     'show-effective',
     'show-efective-graduates',
     'show-full-cops',
-    'show-historical-policie',
+    'show-historical-police',
     'show-inactive',
     'show-inactive-dependents',
     'show-opm',
@@ -21,6 +21,7 @@ return [
     'edit-email',
     'delete-email',
     'show-log',
+    'create-log',
     'show-permission',
     'create-permission',
     'edit-permission',
@@ -37,6 +38,9 @@ return [
     'create-user',
     'edit-user',
     'delete-user',
+    'delete-user',
+    'restore-user',
+    'forcedelete-user',
     'show-higher',
     'show-another-opm'
 ];

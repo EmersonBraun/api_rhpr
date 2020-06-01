@@ -12,7 +12,7 @@ function InitServer () {
     echo -e "${GREEN}(Laradock) Copy env-example .env${NC}"
     cp env-example .env
     echo -e "${GREEN}(Laradock) Initializing services${NC}"
-    docker-compose up -d nginx workspace postgres mongo
+    docker-compose up -d nginx workspace postgres mongo redis
     echo -e "${GREEN}(Laravel) Instal dependences${NC}"
     docker-compose exec workspace composer install
     echo -e "${GREEN}(Laravel) Run Migrations${NC}"
@@ -31,7 +31,7 @@ function InitServer () {
 function UpServer () {
     cd laradock/
     echo -e "${GREEN}Initializing services${NC}"
-    docker-compose up -d nginx workspace postgres mongo
+    docker-compose up -d nginx workspace postgres mongo redis
 }
 
 function DownServer () {

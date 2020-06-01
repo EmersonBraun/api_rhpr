@@ -2,10 +2,11 @@
 
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Log extends Model
 {
+    protected $connection = 'mongodb';
     /**
      * The table associated with the model.
      *
@@ -18,7 +19,7 @@ class Log extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = '_id';
 
     /**
      * The attributes that are mass assignable.
@@ -39,7 +40,7 @@ class Log extends Model
      *
      * @var array
      */
-    protected $guarded = ['id'];
+    protected $guarded = ['_id'];
 
     /**
      * The attributes that should be cast to native types.

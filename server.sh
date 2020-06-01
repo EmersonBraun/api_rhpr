@@ -66,6 +66,8 @@ function PS () {
 
 function Rebuild () {
     cd laradock/
+    echo -e "${GREEN}Remove images${NC}"
+    docker rmi $(docker image ls -aq)
     echo -e "${GREEN}Rebuild containers${NC}"
     docker-compose build workspace php-fpm nginx postgres mongo
 }

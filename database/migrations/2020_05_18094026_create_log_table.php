@@ -13,15 +13,17 @@ class LogTable extends Migration
      */
     public function up()
     {
-        Schema::create('logs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('system_name');
-            $table->string('ip');
-            $table->string('url');
-            $table->string('query');
-            $table->integer('status_request');
-            $table->timestamp('created_at', 0)->useCurrent();
-        });
+        if (!Schema::connection('mongodb')->hasTable('logs')) {
+            Schema::connection('mongodb')->create('logs', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('system_name');
+                $table->string('ip');
+                $table->string('url');
+                $table->string('query');
+                $table->integer('status_request');
+                $table->timestamp('created_at', 0)->useCurrent();
+            });
+        }
     }
 
     /**

@@ -69,9 +69,10 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $response = $this->repository->create($request->all());
-        if (isset($request->permissions)) {
-            $assyncPermissions = $this->repository->assyncPermissions($request->permissions, $id);
-            array_push($response->headers, $assyncPermissions);
+        if (isset($request->permissions) && isset($response->data->id)) {
+            $assyncPermissions = $this->repository->assyncPermissions($request->permissions, $response->data->id, true);
+            $response->headers['attached'] = $assyncPermissions["attached"];
+            $response->headers['detached'] = $assyncPermissions["detached"];
         }
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
@@ -144,8 +145,9 @@ class UserController extends Controller
     {
         $response = $this->repository->findAndUpdate($id, $request->all());
         if (isset($request->permissions)) {
-            $assyncPermissions = $this->repository->assyncPermissions($request->permissions, $id);
-            array_push($response->headers, $assyncPermissions);
+            $assyncPermissions = $this->repository->assyncPermissions($request->permissions, $id, true);
+            $response->headers['attached'] = $assyncPermissions["attached"];
+            $response->headers['detached'] = $assyncPermissions["detached"];
         }
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }

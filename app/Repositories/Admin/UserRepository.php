@@ -7,6 +7,7 @@ use App\Repositories\BaseRepository;
 use App\Repositories\Admin\PermissionRepository;
 
 use App\Traits\ResponseTrait;
+use Illuminate\Support\Arr;
 /**
 * Repository Pattern allows encapsulation of data access logic
 */
@@ -40,19 +41,42 @@ class UserRepository extends BaseRepository
         return $this->mountReturn('load', $response, $this->statusCode, $this->contentError);
     }
 
-    public function assyncPermissions ($permissions=[], $id=null)
+    public function assyncPermissions ($permissions=[], $id=null, $simpleReturn=false)
     {
         if (!$permissions || !$id) return false;
         
-        dd($permissions);
+        $permissionsIds = $this->getPermissionIds($permissions);
+        
+        try {
+            $this->obj = $this->model->where('id',$id)->first()->permissions()->sync($permissionsIds);
+            $response = $this->obj ?? [];
+            $this->statusCode = 200;
+        } catch (\Throwable $th) {
+            $this->contentError = $th->getMessage();
+            $response = [];
+        } 
+        
+        if ($simpleReturn) return $this->attachedsArrayToString($response);
+        return $this->mountReturn('update', $response, $this->statusCode, $this->contentError);
+    }
+
+    public function attachedsArrayToString ($attacheds)
+    {
+        $attached = (isset($attacheds['attached']) && count($attacheds['attached'])) ? implode(", ",$attacheds['attached']) : '';
+        $detached = (isset($attacheds['detached']) && count($attacheds['detached'])) ? implode(", ",$attacheds['detached']) : '';
+        
+        return [
+            'attached' => $attached,
+            'detached' => $detached
+        ];
     }
 
     public function getPermissionIds ($permissions)
     {
         $permissionsIds = [];
         foreach ($permissions as $permission) {
-            if (!is_numeric($permission)) $idPermission = $permission;
-            else $idPermission = $this->permission->getIdByName($permission);
+            if (is_numeric($permission)) $idPermission = $permission;
+            else $idPermission = $this->permission->getIdByName($permission, true);
             array_push($permissionsIds, $idPermission);
         }
         if (!count($permissionsIds)) return [];

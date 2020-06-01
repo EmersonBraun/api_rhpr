@@ -34,8 +34,17 @@ class PermissionRepository extends BaseRepository
         return $this->mountReturn('load', $response, $this->statusCode, $this->contentError);
     }
 
-    public function getIdByName ($permission)
+    public function getIdByName ($permission, $simpleReturn=false)
     {
-        // 
+        try{
+            $this->obj = $this->model->where('permission', $permission)->first();
+            $response = isset($this->obj->id) ? $this->obj->id: null;
+            $this->statusCode = 200;
+        } catch(\Throwable $th) {
+            $this->contentError = $th->getMessage();
+            $response = null;
+        } 
+        if ($simpleReturn) return $response;
+        return $this->mountReturn('load', $response, $this->statusCode, $this->contentError);
     }
 }

@@ -12,7 +12,7 @@ function InitServer () {
     echo -e "${GREEN}(Laradock) Copy env-example .env${NC}"
     cp env-example .env
     echo -e "${GREEN}(Laradock) Initializing services${NC}"
-    docker-compose up -d nginx workspace postgres
+    docker-compose up -d nginx workspace postgres mongo
     echo -e "${GREEN}(Laravel) Instal dependences${NC}"
     docker-compose exec workspace composer install
     echo -e "${GREEN}(Laravel) Clean cache${NC}"
@@ -29,7 +29,7 @@ function InitServer () {
 function UpServer () {
     cd laradock/
     echo -e "${GREEN}Initializing services${NC}"
-    docker-compose up -d nginx workspace postgres
+    docker-compose up -d nginx workspace postgres mongo
 }
 
 function DownServer () {
@@ -64,6 +64,12 @@ function PS () {
     docker-compose ps
 }
 
+function Rebuild () {
+    cd laradock/
+    echo -e "${GREEN}Rebuild containers${NC}"
+    docker-compose build workspace php-fpm nginx postgres mongo
+}
+
 function GetModule () {
     cd app/Console
     echo -e "${GREEN}Clone module generator${NC}"
@@ -87,6 +93,8 @@ elif [ $1 = "pgadmin" ]; then
     PgAdmin
 elif [ $1 = "ps" ]; then
     PS
+elif [ $1 = "rebuild" ]; then
+    Rebuild
 else
     echo -e "$1 ${RED}it's an invalid option${NC}"
     exit 1

@@ -120,6 +120,7 @@ Route::group(['middleware' => 'jwt.verify','prefix' =>'admin'],function(){
     Route::group(['as'=>'log.','prefix' =>'log'],function(){
         Route::get('',['as' =>'index','uses'=>'Admin\LogController@index','middleware' => ['permission:show-log']]);
         Route::post('',['as' =>'store','uses'=>'Admin\LogController@store','middleware' => ['permission:create-log']]);
+        Route::get('/{key}/{value}',['as' =>'show','uses'=>'Admin\LogController@getByPair','middleware' => ['permission:show-log']]);
         Route::get('/{id}',['as' =>'show','uses'=>'Admin\LogController@show','middleware' => ['permission:show-log']]);
     });
     Route::group(['as'=>'permission.','prefix' =>'permission'],function(){

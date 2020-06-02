@@ -3,18 +3,31 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use JWTAuth;
 use App\Repositories\Admin\UserRepository;
 use App\Traits\ResponseTrait;
+use App\Services\LogService;
+use App\Services\AuthorizationService;
+use App\Services\BlockService;
 
 class CheckHasPermission
 {
   use ResponseTrait;
 
   protected $repository;
-  public function __construct(UserRepository $repository)
+  protected $log;
+  protected $authorization;
+  protected $block;
+  public function __construct(
+    UserRepository $repository, 
+    LogService $log, 
+    AuthorizationService $authorization,
+    BlockService $block
+  )
 	{
     $this->repository = $repository;
+    $this->log = $log;
+    $this->authorization = $authorization;
+    $this->block = $block;
   }
   /**
    * Handle an incoming request.
@@ -25,19 +38,21 @@ class CheckHasPermission
    */
   public function handle($request, Closure $next, $permission='')
   {
-    $user = JWTAuth::toUser($request->token);
+    $user = $this->repository->getUserByToken($request->token);
     if (!$user) {
       $response = $this->failedResponse('User not found!');
       return response()->json($response->data, 401, $response->headers, $response->options);
     }
-    $permissions = $this->repository->getAllPermissions($user->id, true);
-    if (!$permissions) {
-      $response = $this->failedResponse('Not has permissions!');
-      return response()->json($response->data, 401, $response->headers, $response->options);
-    }
-    if (!in_array($permission, $permissions)) {
-      $response = $this->failedResponse('Not has permission to access this resource!');
-      return response()->json($response->data, 401, $response->headers, $response->options);
+
+    $response = $this->authorization->hasPermission($user->id, $permission, true);
+    if(!$response['authorized']) {
+      if(!$response['error']) {
+        $log = $this->log->store($user, $request, $query='-', $status=401);     
+        $block = $this->block->addStrike($user->id);
+      }
+
+      $headers = $this->mountHeader('error', $response['msg']);
+      return response()->json([], 401, $headers);
     }
 
     return $next($request);

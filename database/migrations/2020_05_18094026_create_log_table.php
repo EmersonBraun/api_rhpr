@@ -16,7 +16,8 @@ class LogTable extends Migration
         if (!Schema::connection('mongodb')->hasTable('logs')) {
             Schema::connection('mongodb')->create('logs', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('system_name');
+                $table->string('rg');
+                $table->string('name');
                 $table->string('ip');
                 $table->string('url');
                 $table->string('query');

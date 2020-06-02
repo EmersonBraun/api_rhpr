@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
+use Cache;
 /**
 * Repository Pattern allows encapsulation of data access logic
 */
@@ -20,6 +21,7 @@ class UserRepository extends BaseRepository
 
     protected $model;
     protected $permission;
+    protected $expiration = 60;
     
 	public function __construct( 
         User $model, 
@@ -33,7 +35,9 @@ class UserRepository extends BaseRepository
     public function getAllData($id)
     {
         try{
-            $this->obj = $this->model->where('id',$id)->with(['systems','phones','emails','permissions'])->get();
+            $this->obj = Cache::tags('user')->remember("user:$id", $this->expiration, function() {
+                return $this->model->where('id',$id)->with(['systems','phones','emails','permissions'])->get();
+            });
             $response = $this->obj ?? [];
             $this->statusCode = 200;
         } catch(\Throwable $th) {
@@ -100,6 +104,20 @@ class UserRepository extends BaseRepository
         return $response;
     }
 
+    public function getUserByToken ($token)
+    {
+        try {
+            $this->obj = JWTAuth::toUser($token);
+            $response = $this->obj ?? [];
+            $this->statusCode = 200;
+        } catch (\Throwable $th) {
+            $this->contentError = $th->getMessage();
+            $response = [];
+        } 
+
+        return $response;
+    }
+
     public function login ($data)
     {
         $user = $this->getUserByRg($data['rg']);
@@ -117,7 +135,7 @@ class UserRepository extends BaseRepository
     public function getAllPermissions($id, $simpleReturn=false)
     {
         try {
-            $this->obj = $this->model->where('id',$id)->first()->permissions()->get()->toArray();
+            $this->obj = $this->model->where('id',$id)->first()->permissions()->get()->pluck('permission')->toArray();
             $response = $this->obj ?? [];
             $this->statusCode = 200;
         } catch (\Throwable $th) {

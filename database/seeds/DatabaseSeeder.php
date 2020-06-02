@@ -29,10 +29,10 @@ class DatabaseSeeder extends Seeder
             ReservaTableSeeder::class,
             SystemTableSeeder::class,
             LogTableSeeder::class,
+            PermissionTableSeeder::class,
             UserTableSeeder::class,
             PhoneTableSeeder::class,
             EmailTableSeeder::class,
-            PermissionTableSeeder::class,
         ]);
     }
 }

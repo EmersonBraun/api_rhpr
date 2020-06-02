@@ -20,6 +20,7 @@ class UserTable extends Migration
             $table->string('cpf');
             $table->string('workplace');
             $table->string('password');
+            $table->unsignedBigInteger('strikes')->default(0);
             $table->boolean('blocked')->default(false);
             $table->boolean('reset')->default(true);
             $table->timestamps();

@@ -35,6 +35,7 @@ class User extends Authenticatable implements JWTSubject
         'cpf',
         'workplace',
         'password',
+        'strikes',
         'blocked',
         'reset',
         'system_id'

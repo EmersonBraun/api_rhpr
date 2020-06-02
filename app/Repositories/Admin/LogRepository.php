@@ -20,21 +20,26 @@ class LogRepository extends BaseRepository
 		$this->model = $model;
     }
 
-    /**
-     * Example of expecific action from LogRepositorie.
-     * CRUD functions are inherited from BaseRepository
-     *
-     * @return array
-     */
-    public function example($foo, $bar)
+    public function getByPair($key, $value)
     {
+        // dd($value);
+        $validKeys = ['rg', 'name', 'ip', 'status_request'];
+        if (!isset($key) || !in_array($key, $validKeys)) {
+            return $this->failedResponse('key should be in: '.implode(', ', $validKeys));
+        }
+
+        if (!isset($value)) {
+            return $this->failedResponse('Value is required');
+        }
+
+        $castValue = ($key == 'status_request') ? (int) $value : (string) $value;
         try{
-            $this->obj = $this->model->where(['name'=> $foo, 'age' => $bar])->get();
+            $this->obj = $this->model->where($key, $castValue)->get();
             $this->statusCode = 200;
         } catch(\Throwable $th) {
             $this->returnContent = $th->getMessage();
         }
-        $typeFunction = 'load'; // may load,found,create,update,delete,restore or forceDelete
-        return $this->mountReturn($typeFunction, $this->obj, $this->statusCode, $this->contentError);
+
+        return $this->mountReturn('load', $this->obj, $this->statusCode, $this->contentError);
     }
 }

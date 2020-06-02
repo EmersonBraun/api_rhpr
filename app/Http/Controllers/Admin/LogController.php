@@ -107,4 +107,39 @@ class LogController extends Controller
         return response()->json($response->data, $response->status, $response->headers, $response->options);
     }
 
+    /**
+    * @OA\Get(
+    *     tags={"admin\Log\{key}\{value}"},
+    *     path="api/v1/admin/Log/{key}/{value}",
+    *     description="Return a list of specifics admin\Log",
+    *     @OA\Parameter(
+    *         name="id",
+    *         type="int",
+    *         description="Number identification of admin\Log",
+    *         required=true,
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="A specific admin\Log",
+    *     ),
+    *     @OA\Response(
+    *         response=400,
+    *         description="An error happened"
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *         response=501,
+    *         description="Not implemented"
+    *     ),
+    * )
+    */
+    public function getByPair($key, $value)
+    {
+        $response = $this->repository->getByPair($key, $value);
+        return response()->json($response->data, $response->status, $response->headers, $response->options);
+    }
+
 }

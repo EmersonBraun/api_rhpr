@@ -12,7 +12,7 @@ use App\Repositories\AusenciaRepository;
 
 class AusenciaTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     /** @test 
 	 * SearchGetWithError

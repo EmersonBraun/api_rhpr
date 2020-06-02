@@ -63,4 +63,13 @@ class Reservation extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'position';
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

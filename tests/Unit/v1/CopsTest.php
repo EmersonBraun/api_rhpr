@@ -12,7 +12,7 @@ use App\Repositories\v1\CopsRepository;
 
 class CopsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

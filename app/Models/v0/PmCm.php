@@ -86,4 +86,13 @@ class PmCm extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'CARGO';
+    }
+
+    public function getOpm()
+    {
+        return 'CDOPM';
+    }
 }

@@ -68,4 +68,13 @@ class Opm extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return false;
+    }
+
+    public function getOpm()
+    {
+        return 'opm_code';
+    }
 }

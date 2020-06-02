@@ -12,7 +12,7 @@ use App\Repositories\v1\PositionsRepository;
 
 class PositionsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

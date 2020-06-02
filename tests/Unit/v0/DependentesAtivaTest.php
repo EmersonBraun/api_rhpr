@@ -12,7 +12,7 @@ use App\Repositories\v0\DependentesAtivaRepository;
 
 class DependentesAtivaTest extends TestCase
 {
-	use DatabaseMigrations;
+	use DatabaseMigrations, WithoutMiddleware;
 	
  	/** @test 
 	 * SearchGetWithError

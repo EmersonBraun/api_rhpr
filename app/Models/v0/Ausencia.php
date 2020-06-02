@@ -69,4 +69,13 @@ class Ausencia extends Model
 		'dt_fim'
     ];
 
+    public function getPosition()
+    {
+        return 'CODIGO';
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

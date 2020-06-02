@@ -18,7 +18,7 @@ class EffectiveGraduatesTable extends Migration
                 SELECT 
                     "UserRG" AS rg,
                     "nome" AS name,
-                    "graduacao" AS graduation,
+                    "graduacao" AS position,
                     "quadro" AS group,
                     "subquadro" AS subgroup,
                     "inclusao_data" AS inclusion_date,

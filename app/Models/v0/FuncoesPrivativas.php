@@ -67,4 +67,13 @@ class FuncoesPrivativas extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'STD_ID_JOB_CODE';
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

@@ -12,7 +12,7 @@ use App\Repositories\v0\PolicialHistoricoRepository;
 
 class PolicialHistoricoTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

@@ -12,3 +12,16 @@ function getUserByToken ($token)
 
     return $response;
 }
+
+
+function getMaxPositonShows ($position)
+{
+    if (!$position) return [];
+    $positionShows = [];
+    foreach (config('cops.position_order') as $positionOrder) {
+        if ($positionOrder == strtoupper($position)) break;
+        else array_push($positionShows, $positionOrder);
+    }
+
+    return $positionShows;
+}

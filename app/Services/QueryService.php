@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use App\Traits\ResponseTrait;
+use App\Services\AuthorizationService;
+use App\Services\LogService;
 
 class QueryService {
     use ResponseTrait;
@@ -14,8 +16,34 @@ class QueryService {
     protected $page = false;
     protected $perPage = 10;
 
-    public function query($model, $data, $verbose='GET', $noExecute=false) 
+    protected $user;
+    protected $showHigher;
+    protected $showAnotherOpm; 
+
+    protected $authorization;
+    protected $log;
+    public function __construct(AuthorizationService $authorization, LogService $log)
+	{
+        $this->authorization = $authorization;
+        $this->log = $log;
+    }
+
+    public function verifyPermissions($request)
     {
+        // not implemented
+        $this->user = getUserByToken($request->token);       
+        $showHigher = $this->authorization->hasPermission($this->user->id, 'show-higher');
+        $this->showHigher = $showHigher['authorized'];
+        $showAnotherOpm = $this->authorization->hasPermission($this->user->id, 'show-another-opm');
+        $this->showAnotherOpm = $showAnotherOpm['authorized'];
+    }
+
+    public function query($model, $request, $noExecute=false) 
+    {
+        $data = $request->all();
+        $verbose = $request->method();
+        // $this->verifyPermissions($request);
+
         $this->sanitizeModel($model);
         $page = $this->sanitizePages($data);
         $this->sanitizeData($data);
@@ -78,6 +106,14 @@ class QueryService {
                 }
             }
         }
+
+        // if (!$this->showHigher && $this->model->getPosition()) {
+        //     $maxPositionShows = getMaxPositonShows($this->user->position);
+        //     $query->whereIn($this->model->getPosition(), $maxPositionShows);
+        // }
+        // if (!$this->showAnotherOpm && $this->model->getOpm()) {
+        //     $query->where($this->model->getOpm(), 'like' ,$this->user->opm_code);
+        // }
         
         if (count($this->queryOrder)) {
             foreach ($this->queryOrder as $key => $value) {
@@ -144,16 +180,26 @@ class QueryService {
         return $cleanVal;
     }
 
-    public function execute($query, $page=false)
+    public function execute($query, $page=false, $request)
     {
+
         try{
             if (isset($page->number)) $response = $query->paginate($page->perPage, ['*'], 'page', $page->number);
             else $response = $query->get();
 
             $this->returnData = $response ? $response : [];
+            $this->registerLog($request, $query);
             return $this->successResponse($this->returnData, 'Success', 200);
         } catch(\Throwable $th) {
             return $this->failedResponse('Error', 400, $th->getMessage());
         }
+
+    }
+    
+    public function registerLog($request, $query, $status=200)
+    {
+        $queryMounted = $this->queryMounted($query);
+        $user = getUserByToken($request->token);
+        $log = $this->log->store($user, $request, $queryMounted, $status);
     }
 }

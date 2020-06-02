@@ -64,4 +64,13 @@ class InactiveDependents extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return false;
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

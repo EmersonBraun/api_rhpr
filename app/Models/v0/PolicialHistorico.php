@@ -88,4 +88,13 @@ class PolicialHistorico extends Model
         'dh_fim',
     ];
 
+    public function getPosition()
+    {
+        return 'CARGO';
+    }
+
+    public function getOpm()
+    {
+        return 'CDOPM';
+    }
 }

@@ -63,4 +63,13 @@ class Reserva extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'posto';
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

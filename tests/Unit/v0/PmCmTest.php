@@ -12,7 +12,7 @@ use App\Repositories\v0\PmCmRepository;
 
 class PmCmTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

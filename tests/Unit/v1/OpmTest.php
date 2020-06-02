@@ -12,7 +12,7 @@ use App\Repositories\v1\OpmRepository;
 
 class OpmTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

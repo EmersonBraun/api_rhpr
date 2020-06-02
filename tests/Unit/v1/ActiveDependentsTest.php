@@ -12,7 +12,7 @@ use App\Repositories\v1\ActiveDependentsRepository;
 
 class ActiveDependentsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

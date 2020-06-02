@@ -85,4 +85,13 @@ class Policial extends Model
 		'promocao'
     ];
 
+    public function getPosition()
+    {
+        return 'CARGO';
+    }
+
+    public function getOpm()
+    {
+        return 'CDOPM';
+    }
 }

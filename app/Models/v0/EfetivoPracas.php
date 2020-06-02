@@ -65,4 +65,13 @@ class EfetivoPracas extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'graduacao';
+    }
+
+    public function getOpm()
+    {
+        return 'cdopm';
+    }
 }

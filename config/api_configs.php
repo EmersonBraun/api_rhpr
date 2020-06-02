@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'maximun_strikes' => 3
+  'maximun_strikes' => 3,
 ];

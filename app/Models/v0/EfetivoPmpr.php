@@ -85,4 +85,13 @@ class EfetivoPmpr extends Model
 		'STD_DT_BIRTH'
     ];
 
+    public function getPosition()
+    {
+        return 'STD_ID_JOB_CODE';
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

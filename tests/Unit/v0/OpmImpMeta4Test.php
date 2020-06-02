@@ -12,7 +12,7 @@ use App\Repositories\v0\OpmImpMeta4Repository;
 
 class OpmImpMeta4Test extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

@@ -25,6 +25,29 @@ return [
         'NULL' => '99'
     ],
 
+    'position_order' => 
+    [
+        'SD2C',
+        'SD1C',
+        'CABO',
+        '3SGT',
+        '2SGT',
+        '1SGT',
+        'SUBTEN',
+        'ALUNO1A',
+        'ALUNO2A',
+        'ALUNO3A',
+        'ALUNO',
+        'ASPOF',
+        '2TEN',
+        '1TEN',
+        'CAP',
+        'MAJ',
+        'TENCEL',
+        'CEL',
+        'CELAGREG',
+    ],
+
     'class' => 
     [
         'PM' => 'PM',

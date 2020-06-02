@@ -12,7 +12,7 @@ use App\Repositories\v1\InactiveRepository;
 
 class InactiveTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

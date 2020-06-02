@@ -36,7 +36,8 @@ class LogService {
             'ip' => $request->ip(),
             'url' => $request->fullUrl(),
             'query' => $query,
-            'status_request' => $status
+            'status_request' => $status,
+            'created_at' => date('Y-m-d H:i:s')
         ];
 
         $response = $this->repository->create($data);

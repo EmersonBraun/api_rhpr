@@ -12,7 +12,7 @@ use App\Repositories\v1\PrivateFunctionsPeriodsRepository;
 
 class PrivateFunctionsPeriodsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
  
     /** @test 
 	 * SearchGetWithError

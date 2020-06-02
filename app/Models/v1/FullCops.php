@@ -86,4 +86,13 @@ class FullCops extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'position';
+    }
+
+    public function getOpm()
+    {
+        return 'opm_code';
+    }
 }

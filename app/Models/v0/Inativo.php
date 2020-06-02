@@ -79,4 +79,13 @@ class Inativo extends Model
      */
     protected $dates = [];
 
+    public function getPosition()
+    {
+        return 'cargo';
+    }
+
+    public function getOpm()
+    {
+        return false;
+    }
 }

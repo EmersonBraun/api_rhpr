@@ -25,8 +25,8 @@ class PermissionRepository extends BaseRepository
     public function getWithUsers($id)
     {
         try{
-            $this->obj = Cache::tags('permission')->remember("permission:$id", $this->expiration, function() {
-                return $this->model->find($id)->with('user')->first();
+            $this->obj = Cache::tags('permission')->remember("permission:$id", $this->expiration, function() use ($id){
+                return $this->model->find($id)->with('users')->first();
             });
             $response = $this->obj ?? [];
             $this->statusCode = 200;

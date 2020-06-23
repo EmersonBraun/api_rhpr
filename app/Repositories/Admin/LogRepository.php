@@ -22,7 +22,6 @@ class LogRepository extends BaseRepository
 
     public function getByPair($key, $value)
     {
-        // dd($value);
         $validKeys = ['rg', 'name', 'ip', 'status_request'];
         if (!isset($key) || !in_array($key, $validKeys)) {
             return $this->failedResponse('key should be in: '.implode(', ', $validKeys));

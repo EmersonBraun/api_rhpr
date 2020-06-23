@@ -8,12 +8,15 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 use App\Models\Admin\Email;
+use App\Models\Admin\User;
 use App\Repositories\Admin\EmailRepository;
 
 class EmailTest extends TestCase
 {
-    use DatabaseMigrations;
- 
+	use DatabaseMigrations, WithoutMiddleware;
+	
+	protected $baseApi = '/api/admin';
+	protected $route = 'email';
     /** @test 
 	 * Index
 	 *
@@ -21,7 +24,10 @@ class EmailTest extends TestCase
 	 */
 	public function testEmailIndexWithError()
 	{
-        $this->assertTrue(true);
+    $response = $this->get("{$this->baseApi}/{$this->route}s");
+		$response
+			->assertStatus(404)
+			->assertJson([]);
 	}
 
 	/** @test 
@@ -31,7 +37,10 @@ class EmailTest extends TestCase
 	 */
 	public function testEmailIndex()
 	{
-        $this->assertTrue(true); 
+    $response = $this->get("{$this->baseApi}/{$this->route}");
+		$response->assertHeader('returntype', 'success');
+		$response->assertHeader('contenterror', null);
+    $response->assertStatus(200);
 	}
 
 	/** @test 
@@ -39,9 +48,67 @@ class EmailTest extends TestCase
 	 *
 	 * @return void
 	 */
-	public function testEmailCreateWithError()
+	public function testEmailCreateWithNotEmail()
 	{
-        $this->assertTrue(true);
+		$user = factory(User::class)->make();
+		$notEmail = factory(Email::class)->make(['email'=>null, 'user_id' =>  $user->id])->toArray();
+    $response = $this->post("{$this->baseApi}/{$this->route}", $notEmail);
+		$response->assertHeader('returntype', 'error');
+    $response->assertStatus(422);
+	}
+
+	/** @test 
+	 * Create
+	 *
+	 * @return void
+	 */
+	public function testEmailCreateWithWrongEmail()
+	{
+		$user = factory(User::class)->make();
+		$wrongEmail = factory(Email::class)->make(['email'=>'WrongEmail', 'user_id' =>  $user->id])->toArray();
+    $response = $this->post("{$this->baseApi}/{$this->route}", $wrongEmail);
+		$response->assertHeader('returntype', 'error');
+    $response->assertStatus(422);
+	}
+
+	/** @test 
+	 * Create
+	 *
+	 * @return void
+	 */
+	public function testEmailCreateWithWrongUser()
+	{
+		$user = factory(User::class)->make();
+		$wrongUser = factory(Email::class)->make(['user_id' =>  $user->id += 1])->toArray();
+    $response = $this->post("{$this->baseApi}/{$this->route}", $wrongUser);
+		$response->assertHeader('returntype', 'error');
+    $response->assertStatus(422);
+	}
+
+	/** @test 
+	 * Create
+	 *
+	 * @return void
+	 */
+	public function testEmailCreateWithNotUser()
+	{
+		$notUser = factory(Email::class)->make(['user_id' => null])->toArray();
+    $response = $this->post("{$this->baseApi}/{$this->route}", $notUser);
+		$response->assertHeader('returntype', 'error');
+    $response->assertStatus(422);
+	}
+
+	/** @test 
+	 * Create
+	 *
+	 * @return void
+	 */
+	public function testEmailCreateWithNotAll()
+	{
+		$notAll = factory(Email::class)->make(['email'=>null, 'user_id' =>  null])->toArray();
+    $response = $this->post("{$this->baseApi}/{$this->route}", $notAll);
+		$response->assertHeader('returntype', 'error');
+    $response->assertStatus(422);
 	}
 
 	/** @test 
@@ -51,7 +118,13 @@ class EmailTest extends TestCase
 	 */
 	public function testEmailCreate()
 	{
-        $this->assertTrue(true); 
+		$user = factory(User::class)->create();
+		dd($user);
+		$email = factory(Email::class)->make(['user_id' => $user->id])->toArray();
+
+    $response = $this->post("{$this->baseApi}/{$this->route}", $email);
+		$response->assertHeader('returntype', 'success');
+    $response->assertStatus(201); 
 	}
 
 	/** @test 

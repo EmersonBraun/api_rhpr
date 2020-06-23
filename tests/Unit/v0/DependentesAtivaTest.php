@@ -23,7 +23,7 @@ class DependentesAtivaTest extends TestCase
 	protected $route = 'dependentes_ativa';
 	public function testDependentesAtivaSearchGetWithErrorTest()
 	{
-        $response = $this->get("{$this->baseApi}/{$this->route}s");
+    $response = $this->get("{$this->baseApi}/{$this->route}s");
 		$response
 			->assertStatus(404)
 			->assertJson([]);
@@ -36,7 +36,7 @@ class DependentesAtivaTest extends TestCase
 	 */
 	public function testDependentesAtivaSearchGetTest()
 	{
-        $response = $this->get("{$this->baseApi}/{$this->route}");
+    $response = $this->get("{$this->baseApi}/{$this->route}");
 		$response->assertHeader('returntype', 'success');
 		$response->assertHeader('contenterror', null);
         $response->assertStatus(200); 

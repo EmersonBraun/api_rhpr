@@ -2,16 +2,21 @@
 
 namespace Tests\Unit\Admin;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\Models\Admin\User;
 use App\Repositories\Admin\UserRepository;
 
 class UserTest extends TestCase
 {
-    use DatabaseMigrations;
- 
-    /** @test 
+  use DatabaseMigrations, WithoutMiddleware;
+	
+	protected $baseApi = '/api/v0';
+	protected $route = 'ausencia';
+  /** @test 
 	 * Index
 	 *
 	 * @return void

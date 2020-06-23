@@ -22,6 +22,8 @@ use App\Models\Admin\System;
 */
 $fakerBR = FakerFactory::create('pt_BR');
 $factory->define(User::class, function (Faker $faker) use($fakerBR){
+    // $system = System::all()->random()->id;
+    $system = 1;
     return [
         'name' => $faker->name,
         'rg' => $fakerBR->rg,
@@ -30,6 +32,6 @@ $factory->define(User::class, function (Faker $faker) use($fakerBR){
         'password' => bcrypt('secret'),
         'blocked' => $faker->boolean,
         'reset' => $faker->boolean,
-        'system_id' => System::all()->random()->id
+        'system_id' => $system
     ];
 });

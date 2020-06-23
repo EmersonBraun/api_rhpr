@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository
     public function getAllData($id)
     {
         try{
-            $this->obj = Cache::tags('user')->remember("user:$id", $this->expiration, function() {
+            $this->obj = Cache::tags('user')->remember("user:$id", $this->expiration, function() use ($id) {
                 return $this->model->where('id',$id)->with(['systems','phones','emails','permissions'])->get();
             });
             $response = $this->obj ?? [];
@@ -136,6 +136,36 @@ class UserRepository extends BaseRepository
     {
         try {
             $this->obj = $this->model->where('id',$id)->first()->permissions()->get()->pluck('permission')->toArray();
+            $response = $this->obj ?? [];
+            $this->statusCode = 200;
+        } catch (\Throwable $th) {
+            $this->contentError = $th->getMessage();
+            $response = [];
+        } 
+        
+        if ($simpleReturn) return $response;
+        return $this->mountReturn('load', $response, $this->statusCode, $this->contentError);
+    }
+
+    public function block($id, $simpleReturn=false)
+    {
+        try {
+            $this->obj = $this->model->where('id',$id)->update(['blocked' => true])->toArray();
+            $response = $this->obj ?? [];
+            $this->statusCode = 200;
+        } catch (\Throwable $th) {
+            $this->contentError = $th->getMessage();
+            $response = [];
+        } 
+        
+        if ($simpleReturn) return $response;
+        return $this->mountReturn('load', $response, $this->statusCode, $this->contentError);
+    }
+
+    public function unblock($id, $simpleReturn=false)
+    {
+        try {
+            $this->obj = $this->model->where('id',$id)->update(['blocked' => false])->toArray();
             $response = $this->obj ?? [];
             $this->statusCode = 200;
         } catch (\Throwable $th) {

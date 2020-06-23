@@ -2,15 +2,20 @@
 
 namespace Tests\Unit\Admin;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\Models\Admin\Phone;
 use App\Repositories\Admin\PhoneRepository;
 
 class PhoneTest extends TestCase
 {
-    use DatabaseMigrations;
- 
+  use DatabaseMigrations, WithoutMiddleware;
+	
+	protected $baseApi = '/api/v0';
+	protected $route = 'ausencia';
     /** @test 
 	 * Index
 	 *

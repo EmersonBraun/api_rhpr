@@ -21,8 +21,10 @@ use App\Models\Admin\User;
 */
 
 $factory->define(Email::class, function (Faker $faker) {
+    // $userId = User::all()->random()->id;
+    $userId = 1;
     return [
         'email' => $faker->email,
-        'user_id' => User::all()->random()->id
+        'user_id' =>  $userId
     ];
 });
